@@ -3,11 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Portfolio Music Player</title>
+    <style>
+        /* General styling */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #222;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Music player container */
+        .music-player {
+            background: #333;
+            width: 300px;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Display screen */
+        .screen {
+            width: 100%;
+            height: 150px;
+            background: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .screen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        /* Buttons */
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        button {
+            background: #fefeff;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #e68900;
+        }
+    </style>
 </head>
 <body>
-    <a href="./Workbook/Week1/index.html"><img src="./Workbook/img/apple.jpg"></a>
-    <a href="./Workbook/Week2/index.html"><img src="./Workbook/img/atomic.jpeg"></a>
+
+    <div class="music-player">
+        <!-- Small screen display -->
+        <div class="screen">
+            <img id="weekImage" src="/Workbook/img/weekly-preview/week1.png" alt="Week 1">
+        </div>
+        
+        <h2 id="weekTitle">Week 1</h2>
+
+        <!-- Buttons -->
+        <div class="controls">
+            <button onclick="prevWeek()">⏮️</button>
+            <button onclick="playCurrent()">▶️</button>
+            <button onclick="nextWeek()">⏭️</button>
+        </div>
+    </div>
+
+    <script>
+        // Data for weeks (Image sources and page links)
+        const weeks = [
+            { title: "Week 1", img: "/Workbook/img/weekly-preview/week1.png", link: "/Workbook/Week1/index.html" },
+            { title: "Week 2", img: "/Workbook/img/weekly-preview/week2.png", link: "/Workbook/Week2/index.html" },
+            { title: "Week 3", img: "/Workbook/img/weekly-preview/week3.png", link: "Week3/index.html" },
+            { title: "Week 4", img: "img/week4.jpg", link: "Week4/index.html" },
+            { title: "Week 5", img: "img/week5.jpg", link: "Week5/index.html" },
+            { title: "Week 6", img: "img/week6.jpg", link: "Week6/index.html" },
+            { title: "Week 7", img: "img/week7.jpg", link: "Week7/index.html" },
+            { title: "Week 8", img: "img/week8.jpg", link: "Week8/index.html" },
+            { title: "Week 9", img: "img/week9.jpg", link: "Week9/index.html" },
+            { title: "Week 10", img: "img/week10.jpg", link: "Week10/index.html" },
+            { title: "Week 11", img: "img/week11.jpg", link: "Week11/index.html" },
+            { title: "Week 12", img: "img/week12.jpg", link: "Week12/index.html" }
+        ];
+
+        let currentIndex = 0; // Track the current week index
+
+        // Update the screen display
+        function updateDisplay() {
+            const weekImage = document.getElementById("weekImage");
+            const weekTitle = document.getElementById("weekTitle");
+
+            // Set new image and title
+            weekImage.src = weeks[currentIndex].img;
+            weekImage.alt = weeks[currentIndex].title;
+            weekTitle.innerText = weeks[currentIndex].title;
+
+            console.log(`Updated to: ${weeks[currentIndex].title}`);
+        }
+
+        // Play current week (Redirect to that week's page)
+        function playCurrent() {
+            window.location.href = weeks[currentIndex].link;
+        }
+
+        // Next week
+        function nextWeek() {
+            if (currentIndex < weeks.length - 1) {
+                currentIndex++;
+                updateDisplay();
+            }
+        }
+
+        // Previous week
+        function prevWeek() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateDisplay();
+            }
+        }
+    </script>
 
 </body>
 </html>

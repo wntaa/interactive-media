@@ -3,15 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Week 1</title>
+    <title>Document</title>
+    <script>
+        function goToPage(url) {
+            window.location.href = url;
+        }
+    </script>
 </head>
 <body>
-    <h1>Hello World</h1>
-    <p>blurry apple</p>
-    <section>
-        <div>
-            <a href="https://www.w3schools.com"><img src="../img/apple.jpg" width="300"/></a>
-        </div>
-    </section>
+    <div class="button-container">
+        <button onclick="goToPage('basicPage.html')">code workbook
+            <!-- <img src="img/button1.png" alt="Code Workbook"> -->
+        </button>
+        <button onclick="goToPage('workshop.html')"> workshop activity
+            <!-- <img src="img/button2.png" alt="Workshop Activity"> -->
+            
+        </button>
+    </div>
+    
 </body>
 </html>

@@ -6,20 +6,60 @@
 <title>Basic Page</title>
 </head>
 <body>
-<div class="bubble">
+<div class="weekone">
 <h1>Interactive Media</h1>
 <h2>Week 1</h2>
-<strong>HTML Basics</strong>
+<strong>Hello World</strong>
 <p>
-This week we are wrapping our head around the basics of HTML, and
-familiarizing ourselves with <em>what code looks</em> like.
+    We learnt the basics of HTML like <em>inserting images, 
+    italic font</em> and we familiarised ourselves with what 
+    code looks like. 
 </p>
-<button>This button does nothing</button>
+<button onclick="showAlert()">Click!</button>
 </br>
 
 <img
 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy8AVzxQmvj4qlUJA9WZG_vXF5OQO8pbBP5w&usqp=CAU"
 />
 </div>
+
+<!-- button alert function -->
+<script>
+    function showAlert() {
+        alert("This button does nothing.");
+    }
+</script>
+
+<!-- column -->
+<section
+style="
+display: flex;
+flex-direction: row;
+margin: 20px;
+gap: 30px;
+line-height: 45px;
+font-size: 30px;
+"
+>
+<div>
+<i>Evil Media</i> is an attempt to develop an understanding of
+contemporary media systems, techniques, and practices of mediation in an
+era of participation, of massive
+networks in which contests are waged as much between technical systems
+as between ideas
+or more ostensibly social forces, and in which such conflicts in turn
+<strong>ramify</strong>
+</div>
+<div>
+passions, projects, and plans. Much of what we will discuss are the
+<q>gray media</q> most recognizable from the world of work and
+administration, affecting the habits of government, business, and
+culture, yet rarely recognized or explored as media in their own right.
+</div>
+</section>
+<div>
+Excerpt from <em>Evil Media</em>, by Matthew Fuller and Andrew Goffrey
+</div>
+
 </body>
 </html>
