@@ -103,27 +103,27 @@
             { title: "Week 11", img: "img/week11.jpg", link: "Week11/index.html" },
             { title: "Week 12", img: "img/week12.jpg", link: "Week12/index.html" }
         ];
-
+    
         let currentIndex = 0; // Track the current week index
-
+    
         // Update the screen display
         function updateDisplay() {
             const weekImage = document.getElementById("weekImage");
             const weekTitle = document.getElementById("weekTitle");
-
+    
             // Set new image and title
             weekImage.src = weeks[currentIndex].img;
             weekImage.alt = weeks[currentIndex].title;
             weekTitle.innerText = weeks[currentIndex].title;
-
+    
             console.log(`Updated to: ${weeks[currentIndex].title}`);
         }
-
+    
         // Play current week (Redirect to that week's page)
         function playCurrent() {
             window.location.href = weeks[currentIndex].link;
         }
-
+    
         // Next week
         function nextWeek() {
             if (currentIndex < weeks.length - 1) {
@@ -131,7 +131,7 @@
                 updateDisplay();
             }
         }
-
+    
         // Previous week
         function prevWeek() {
             if (currentIndex > 0) {
@@ -139,7 +139,11 @@
                 updateDisplay();
             }
         }
+    
+        // Initialize the display on page load
+        window.onload = updateDisplay;
     </script>
+    
 
 </body>
 </html>
