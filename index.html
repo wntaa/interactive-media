@@ -5,37 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio Music Player</title>
     <style>
-        /* separate CSS file laterrrrrr */
-        /* General styling */
         body {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             background-color: #222;
+            background: url('./Workbook/img/weekly-background/week1bg.png') no-repeat center center fixed;
+            background-size: cover;
             color: white;
             font-family: Arial, sans-serif;
         }
 
-        /* Music player container */
         .music-player {
-            background: #333;
+            position: relative;
+            background: transparent;
             width: 300px;
             padding: 20px;
             text-align: center;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            box-shadow: none;
+            border: 2px solid white;
         }
 
-        /* Display screen */
         .screen {
             width: 100%;
-            height: 150px;
+            height: 280px;
             background: black;
             display: flex;
             justify-content: center;
             align-items: center;
-            border-radius: 8px;
+            border-radius: 10px;
             margin-bottom: 15px;
             overflow: hidden;
         }
@@ -47,103 +47,207 @@
             border-radius: 8px;
         }
 
-        /* Buttons */
         .controls {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             margin-top: 10px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
         }
+
+        .control-button {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .control-button img.icon {
+            width: 24px;  /* Default size for all icons */
+            height: 24px;
+            filter: invert(0); /* Ensures visibility on dark backgrounds */
+            transition: 0.3s;
+        }
+
+        /* Make only the play.png image larger */
+        #play img.icon {
+            width: 52px;  /* Increase play.png size */
+            height: 52px;
+        }
+        .control-button:hover img.icon {
+            filter: invert(0); /* Turns icon black when hovered (if necessary) */
+        }
+
+        .control-button:hover {
+            background: white;
+            color: white;
+        }
+
 
         button {
             background: #fefeff;
             border: none;
             padding: 10px;
             border-radius: 5px;
-            color: white;
             cursor: pointer;
             transition: 0.3s;
         }
 
-        button:hover {
-            background: #e68900;
+        .music-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
         }
+        .sound-wave {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: row;
+            gap: 30px;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .left-wave {
+            left: -350px;
+        }
+
+        .right-wave {
+            right: -350px;
+        }
+
+        .bar {
+            width: 18px;
+            height: 100px;
+            background: white;
+            border-radius: 100px;
+            animation: wave 1s infinite ease-in-out;
+        }
+
+        @keyframes wave {
+            0%, 100% {
+                transform: scaleY(0.5);
+                opacity: 0.6;
+            }
+            50% {
+                transform: scaleY(1.5);
+                opacity: 1;
+            }
+        }
+
+
+        /* Left wave animation delays */
+        .left-wave .bar:nth-child(1) { animation-delay: 0s; }
+        .left-wave .bar:nth-child(2) { animation-delay: 0.15s; }
+        .left-wave .bar:nth-child(3) { animation-delay: 0.3s; }
+        .left-wave .bar:nth-child(4) { animation-delay: 0.45s; }
+        .left-wave .bar:nth-child(5) { animation-delay: 0.6s; }
+
+        /* Right wave animation delays (out of sync with left) */
+        .right-wave .bar:nth-child(1) { animation-delay: 0.6s; }
+        .right-wave .bar:nth-child(2) { animation-delay: 0.45s; }
+        .right-wave .bar:nth-child(3) { animation-delay: 0.3s; }
+        .right-wave .bar:nth-child(4) { animation-delay: 0.15s; }
+        .right-wave .bar:nth-child(5) { animation-delay: 0s; }
+
     </style>
 </head>
 <body>
 
+    <!-- music player -->
     <div class="music-player">
-        <!-- Small screen display -->
         <div class="screen">
             <img id="weekImage" src="./Workbook/img/weekly-preview/week1.png" alt="Week 1">
         </div>
         
-        <h2 id="weekTitle">Week 1</h2>
+        <h2 id="weekTitle">WEEK 1</h2>
 
-        <!-- Buttons -->
         <div class="controls">
-            <button onclick="prevWeek()">⏮️</button>
-            <button onclick="playCurrent()">▶️</button>
-            <button onclick="nextWeek()">⏭️</button>
+            <button id="prev" class="control-button">
+                <img src="./Workbook/img/playprev.png" alt="Previous" class="icon">
+            </button>
+            <button id="play" class="control-button large-play">
+                <img src="./Workbook/img/play.png" alt="Play" class="icon play-icon">
+            </button>
+            <button id="next" class="control-button">
+                <img src="./Workbook/img/playNext.png" alt="Next" class="icon">
+            </button>
         </div>
+        
+        
+
+        <!-- Left sound wave -->
+        <div class="sound-wave left-wave">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <!-- right sound wave -->
+        <div class="sound-wave right-wave">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+
+        <audio id="bg-music" autoplay loop>
+            <source src="./Workbook/img/NAN CHUN.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
     </div>
 
     <script>
-        // Data for weeks (Image sources and page links)
         const weeks = [
-            { title: "Week 1", img: "./Workbook/img/weekly-preview/week1.png", link: "./Workbook/Week1/index.html" },
-            { title: "Week 2", img: "./Workbook/img/weekly-preview/week2.png", link: "./Workbook/Week2/index.html" },
-            { title: "Week 3", img: "./Workbook/img/weekly-preview/week3.png", link: "./Workbook/Week3/index.html" },
-            { title: "Week 4", img: "img/week4.jpg", link: "Week4/index.html" },
-            { title: "Week 5", img: "img/week5.jpg", link: "Week5/index.html" },
-            { title: "Week 6", img: "img/week6.jpg", link: "Week6/index.html" },
-            { title: "Week 7", img: "img/week7.jpg", link: "Week7/index.html" },
-            { title: "Week 8", img: "img/week8.jpg", link: "Week8/index.html" },
-            { title: "Week 9", img: "img/week9.jpg", link: "Week9/index.html" },
-            { title: "Week 10", img: "img/week10.jpg", link: "Week10/index.html" },
-            { title: "Week 11", img: "img/week11.jpg", link: "Week11/index.html" },
-            { title: "Week 12", img: "img/week12.jpg", link: "Week12/index.html" }
+            { title: "WEEK 1", img: "./Workbook/img/weekly-preview/week1.png", link: "./Workbook/Week1/index.html" },
+            { title: "WEEK 2", img: "./Workbook/img/weekly-preview/week2.png", link: "./Workbook/Week2/index.html" },
+            { title: "WEEK 3", img: "./Workbook/img/weekly-preview/week3.png", link: "./Workbook/Week3/index.html" }
         ];
-    
-        let currentIndex = 0; // Track the current week index
-    
-        // Update the screen display
+        
+        let currentIndex = 0;
+        
         function updateDisplay() {
-            const weekImage = document.getElementById("weekImage");
-            const weekTitle = document.getElementById("weekTitle");
-    
-            // Set new image and title
-            weekImage.src = weeks[currentIndex].img;
-            weekImage.alt = weeks[currentIndex].title;
-            weekTitle.innerText = weeks[currentIndex].title;
-    
-            console.log(`Updated to: ${weeks[currentIndex].title}`);
+            document.getElementById("weekImage").src = weeks[currentIndex].img;
+            document.getElementById("weekTitle").innerText = weeks[currentIndex].title;
+            document.getElementById("play").setAttribute("data-link", weeks[currentIndex].link);
         }
-    
-        // Play current week (Redirect to that week's page)
-        function playCurrent() {
-            window.location.href = weeks[currentIndex].link;
-        }
-    
-        // Next week
-        function nextWeek() {
-            if (currentIndex < weeks.length - 1) {
-                currentIndex++;
-                updateDisplay();
-            }
-        }
-    
-        // Previous week
-        function prevWeek() {
+
+
+        document.getElementById("prev").addEventListener("click", () => {
             if (currentIndex > 0) {
                 currentIndex--;
                 updateDisplay();
             }
-        }
-    
-        // Initialize the display on page load
-        window.onload = updateDisplay;
-    </script>
-    
+        });
 
+        document.getElementById("next").addEventListener("click", () => {
+            if (currentIndex < weeks.length - 1) {
+                currentIndex++;
+                updateDisplay();
+            }
+        });
+
+        document.getElementById("play").addEventListener("click", () => {
+            const link = document.getElementById("play").getAttribute("data-link");
+            if (link) {
+                window.location.href = link;
+            }
+        });
+        updateDisplay(); 
+
+
+    </script>
 </body>
 </html>

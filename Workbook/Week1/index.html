@@ -9,17 +9,51 @@
             window.location.href = url;
         }
     </script>
+    <style>
+        /* Center the button container */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #222;
+        }
+
+        div {
+            display: flex;
+            flex-direction: row; 
+            gap: 20px; 
+        }
+
+        /* ref: hoverdev url: https://www.hover.dev/components/buttons */
+        .dotted-button {
+            border: 2px dashed black;
+            background-color: white;
+            padding: 12px 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: black;
+            transition: all 0.3s;
+            border-radius: 16px;
+        }
+
+        .dotted-button:hover {
+            transform: translate(-4px, -4px);
+            border-radius: 8px;
+            box-shadow: 4px 4px 0px black;
+        }
+
+        .dotted-button:active {
+            transform: translate(0px, 0px);
+            border-radius: 16px;
+            box-shadow: none;
+        }
+    </style>
 </head>
 <body>
-    <div class="button-container">
-        <button onclick="goToPage('basicPage.html')">code workbook
-            <!-- <img src="img/button1.png" alt="Code Workbook"> -->
-        </button>
-        <button onclick="goToPage('workshop.html')"> workshop activity
-            <!-- <img src="img/button2.png" alt="Workshop Activity"> -->
-            
-        </button>
+    <div>
+        <button onclick="goToPage('basicPage.html')" class="dotted-button">Code Workbook</button>
+        <button onclick="goToPage('workshop.html')" class="dotted-button">Workshop Activity</button>
     </div>
-    
 </body>
 </html>
