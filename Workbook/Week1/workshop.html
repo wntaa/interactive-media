@@ -1,81 +1,443 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Three Column Image Layout</title>
+    <title>Week 1 - Interface Exploration</title>
+    <link rel="stylesheet" href="../../style.css">
     <style>
-        /* Centering the page */
-        body {
-            background-color: #f4f4f4;
-            text-align: center;
-            padding: 20px;
-            font-family: Arial, sans-serif;
-        }
-
-        /* Title styling */
-        h1 {
-            margin-bottom: 20px;
-            font-size: 28px;
-            color: #333;
-        }
-
-        /* Centering content */
-        .content {
-            display: flex;
-            justify-content: center;
-        }
-
-        /* Grid container */
-        .image-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
-            gap: 15px;
-            width: fit-content;
-            margin: 0 auto;
-        }
-
-        /* Image box */
-        .image-box {
-            text-align: center;
-        }
-
-        /* Image styling */
-        .image-box img {
-            width: 200px;
-            height: 300px;
-            object-fit: cover;
+        /* Additional styles for new sections */
+        .reflection-box {
+            background: rgba(0, 0, 0, 0.2);
             border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #3E8A96;
         }
-
-        /* Caption styling */
-        .image-box figcaption {
-            margin-top: 8px;
+        
+        .speculative-interfaces {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .speculative-card {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .speculative-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .speculative-image {
+            width: 100%;
+            height: 200px;
+            background-color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .speculative-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .speculative-content {
+            padding: 20px;
+        }
+        
+        .speculative-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #F7BD63;
+        }
+        
+        .speculative-description {
+            margin-bottom: 15px;
+        }
+        
+        .speculative-detail {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        
+        .workshop-process {
+            margin-top: 40px;
+        }
+        
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .process-item {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .process-item h4 {
+            color: #F7BD63;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        
+        .process-item p {
+            margin-bottom: 15px;
             font-size: 14px;
-            color: #666;
+            line-height: 1.6;
+        }
+        
+        .gesture-analysis {
+            margin-top: 40px;
+        }
+        
+        .gesture-description {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .course-theme {
+            background: rgba(247, 189, 99, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 40px;
+            border-left: 4px solid #F7BD63;
         }
     </style>
 </head>
 <body>
+    <div class="name-tag">Winter Park | 1266782</div>
+    <a href="../../index.html" class="back-button">Back to Player</a>
 
-    <h1>Gesture</h1>
-
-    <div class="content">
-        <div class="image-container">
-            <figure class="image-box">
-                <img src="/Workbook/img/workshop/1-1.png" alt="Image 1">
-                <figcaption>Hug</figcaption>
-            </figure>
-            <figure class="image-box">
-                <img src="/Workbook/img/workshop/1-2.png" alt="Image 2">
-                <figcaption>Take a Photo</figcaption>
-            </figure>
-            <figure class="image-box">
-                <img src="/Workbook/img/workshop/1-3.png" alt="Image 3">
-                <figcaption>Play Game</figcaption>
-            </figure>
+    <div class="container">
+        <div class="header-section">
+            <h1>Week 1</h1>
+            <p class="subtitle">GESTURE AND INTERACTIVITY</p>
         </div>
-    </div>
+        
+        <!-- Pre-workshop Section -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Pre-Workshop</h2>
+                <p class="section-subtitle">Immersive Interfaces</p>
+            </div>
+            
+            <!-- Hunt'N'Gather Exhibitions -->
+            <h3>Interactive Exhibition Analysis</h3>
+            
+            <div class="exhibition">
+                <div class="exhibition-image">
+                    <img src="../img/workshop/114027-7323-TheLume_VanGogh_SSchultz_Nov21_028.jpg" alt="Van Gogh Lume Exhibition">
+                </div>
+                <div class="exhibition-content">
+                    <h4 class="exhibition-title">Van Gogh Lume Exhibition</h4>
+                    <p class="exhibition-subtitle">Digital Art Immersion</p>
+                    <div class="exhibition-description">
+                        <p>A digital art exhibition that projects Van Gogh's painting onto large surfaces, making them immersive and interactive where audience can walk through moving arts.</p>
+                        <p><strong>Experience:</strong> Uses animation, music and sensory effects (light, sound and scents / 360 degree projection) to bring classic artwork to life in a 360 degree experience.</p>
+                    </div>
+                    
+                    <!-- Added reflection -->
+                    <div class="reflection-box">
+                        <h5>Personal Reflection:</h5>
+                        <p>What struck me most about the Lume exhibition was how it transformed traditionally static paintings into dynamic, experiential environments. The synchronisation of music with visual elements created a multi-sensory experience that engaged visitors on an emotional level rather than just an intellectual one. This type of immersion relates directly to our course theme of synaesthesia by blending visual art with sonic and spatial elements.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="exhibition">
+                <div class="exhibition-image">
+                    <img src="../img/workshop/infinityRoom.jpg" alt="Yayoi Kusama's Infinity Rooms">
+                </div>
+                <div class="exhibition-content">
+                    <h4 class="exhibition-title">Yayoi Kusama's 'Infinity Rooms' at NGV</h4>
+                    <p class="exhibition-subtitle">Endless Reflections</p>
+                    <div class="exhibition-description">
+                        <p>Immersive art installations by Japanese artist Yayoi Kusama, featuring mirrored rooms that create endless reflections.</p>
+                        <p><strong>Experience:</strong> Provides a sensory-rich experience that explores themes of infinity and self-obliteration.</p>
+                    </div>
+                    
+                    <!-- Added reflection -->
+                    <div class="reflection-box">
+                        <h5>Personal Reflection:</h5>
+                        <p>Kusama's Infinity Rooms demonstrate a fascinating interplay between physical space and perception. The use of mirrors creates an illusion of infinite space that disorients the viewer in a strangely pleasant way. This relates to our course theme by playing with the boundaries between sense (what we know to be true about the physical space) and nonsense (the impossible infinity we perceive). The disorientation creates a kind of synaesthetic experience where spatial perception becomes almost dreamlike.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="exhibition">
+                <div class="exhibition-image">
+                    <img src="../img/workshop/acmi.jpg" alt="ACMI Exhibition">
+                </div>
+                <div class="exhibition-content">
+                    <h4 class="exhibition-title">ACMI's 'The Story of the Moving Image' Exhibition</h4>
+                    <p class="exhibition-subtitle">Interactive Screen Culture</p>
+                    <div class="exhibition-description">
+                        <p>A permanent exhibition at the Australian Centre for the Moving Image exploring the history and future of screen culture.</p>
+                        <p><strong>Experience:</strong> Features interactive experiences, including 'The Lens' device that allows visitors to collect and explore exhibits digitally.</p>
+                    </div>
+                    
+                    <!-- Added reflection -->
+                    <div class="reflection-box">
+                        <h5>Personal Reflection:</h5>
+                        <p>ACMI's approach to interaction design through 'The Lens' device is particularly clever as it bridges physical and digital experiences. What I found most engaging was how this digital tool enhances rather than replaces the physical exhibition, creating a layered experience where visitors can both engage with physical objects and collect digital memories. This hybrid approach to interactivity seems especially relevant for our studies as it represents how digital interfaces can enhance rather than replace tangible experiences.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Course Theme Connection -->
+            <div class="course-theme">
+                <h3>Connection to Course Theme: "Sense, Nonsense, & Synaesthesia"</h3>
+                <p>These three exhibitions collectively demonstrate different approaches to the course theme:</p>
+                <ul>
+                    <li><strong>Sense:</strong> Each installation engages multiple senses simultaneously, creating richer, more memorable experiences than traditional single-sense media.</li>
+                    <li><strong>Nonsense:</strong> Both Kusama's infinity rooms and Van Gogh Lume play with perceptual impossibilities - spaces that appear endless or paintings that move and respond.</li>
+                    <li><strong>Synaesthesia:</strong> These installations deliberately blend sensory experiences, with ACMI connecting physical and digital realms, Lume blending visual art with sound and environmental effects, and Kusama creating spatial disorientation through visual repetition.</li>
+                </ul>
+                <p>This exploration has inspired me to consider how interfaces might engage multiple senses simultaneously or create unexpected connections between different modes of perception.</p>
+            </div>
+            
+            <!-- Iron Man Interfaces -->
+            <h3>Film Interface Analysis: Iron Man</h3>
+            
+            <div class="interface-cards">
+                <div class="interface-card">
+                    <h4>JARVIS (AI Assistant)</h4>
+                    <div class="interface-image">
+                        <img src="../img/workshop/jarvis.jpg" alt="JARVIS Interface">
+                    </div>
+                    <div class="interface-details">
+                        <p class="interface-label">What:</p>
+                        <p class="interface-text">A smart voice-controlled AI system</p>
+                        
+                        <p class="interface-label">What it's for:</p>
+                        <p class="interface-text">Helps Tony Stark control his Iron Man suit, run diagnostics, and even build new technology</p>
+                        
+                        <p class="interface-label">How it works:</p>
+                        <p class="interface-text">Tony just talks to it, and JARVIS responds, showing information on screens or controlling machines</p>
+                    </div>
+                </div>
+                
+                <div class="interface-card">
+                    <h4>Holographic Interface</h4>
+                    <div class="interface-image">
+                        <img src="../img/workshop/hologram2.jpg" alt="Holographic Interface">
+                    </div>
+                    <div class="interface-details">
+                        <p class="interface-label">What:</p>
+                        <p class="interface-text">Floating 3D images that Tony can interact with using his hands</p>
+                        
+                        <p class="interface-label">What it's for:</p>
+                        <p class="interface-text">Helps him design and test new Iron Man suits</p>
+                        
+                        <p class="interface-label">How it works:</p>
+                        <p class="interface-text">He moves his hands to zoom in, rotate, or break apart 3D models - like a giant touchscreen in the air</p>
+                    </div>
+                </div>
+                
+                <div class="interface-card">
+                    <h4>Iron Man Helmet HUD</h4>
+                    <div class="interface-image">
+                        <img src="../img/workshop/helmet.jpg" alt="Iron Man HUD">
+                    </div>
+                    <div class="interface-details">
+                        <p class="interface-label">What:</p>
+                        <p class="interface-text">A digital screen inside the Iron Man helmet</p>
+                        
+                        <p class="interface-label">What it's for:</p>
+                        <p class="interface-text">Shows important info like suit power levels, target tracking, and incoming threats</p>
+                        
+                        <p class="interface-label">How it works:</p>
+                        <p class="interface-text">Tony sees everything through his helmet, and JARVIS provides real-time updates</p>
+                    </div>
+                </div>
+                
+                <div class="interface-card">
+                    <h4>Touchscreen Computers</h4>
+                    <div class="interface-image">
+                        <img src="../img/workshop/holographic.jpg" alt="Touchscreen Computers">
+                    </div>
+                    <div class="interface-details">
+                        <p class="interface-label">What:</p>
+                        <p class="interface-text">High-tech glass panels that act as futuristic touchscreens</p>
+                        
+                        <p class="interface-label">What it's for:</p>
+                        <p class="interface-text">Used to control JARVIS and design Iron Man suits</p>
+                        
+                        <p class="interface-label">How it works:</p>
+                        <p class="interface-text">Tony swipes, drags and taps on them like a giant tablet</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Added real-world connection -->
+            <div class="reflection-box" style="margin-top: 30px;">
+                <h4>Film Interface Insights</h4>
+                <p>Iron Man's interfaces are compelling because they emphasise natural interaction through gestures, voice, and spatial awareness. While they might seem fantastical, they've accurately predicted several trends in interface design:</p>
+                <ul>
+                    <li>Voice assistants like JARVIS now exist in the form of Siri, Alexa, and Google Assistant</li>
+                    <li>Gesture-controlled interfaces are becoming commonplace in VR/AR environments</li>
+                    <li>Head-up displays (HUDs) are increasingly used in specialised industries and luxury vehicles</li>
+                </ul>
+                <p>What I find most interesting is how these fictional interfaces prioritise the elimination of physical barriers between user and technology - something we're seeing more of in modern UX/UI design with the rise of gesture, voice, and spatial computing.</p>
+            </div>
+        </section>
 
+        <!-- Workshop Section -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Workshop</h2>
+                <p class="section-subtitle">Gesture Analysis</p>
+            </div>
+            
+            <!-- Workshop Process Documentation -->
+            <div class="workshop-process">
+                <h3>Human Computer in Your Face Workshop</h3>
+                <p>In this workshop activity, we worked in pairs to create a gesture dictionary and explore the relationship between human movement and computer interaction.</p>
+                
+                <div class="process-grid">
+                    <div class="process-item">
+                        <h4>Step 1: Brainstorming</h4>
+                        <p>We began by discussing everyday gestures that could be used to trigger interactions with technology. We considered both common gestures (like swiping, tapping) and more unusual movements that aren't typically associated with computer interfaces.</p>
+                    </div>
+                    
+                    <div class="process-item">
+                        <h4>Step 2: Documentation</h4>
+                        <p>We photographed each gesture, carefully considering the framing to clearly communicate the movement. This documentation process made us think about how to visually represent motion in a static image.</p>
+                    </div>
+                    
+                    <div class="process-item">
+                        <h4>Step 3: Mapping</h4>
+                        <p>For each gesture, we discussed what kind of interaction it might trigger in a digital interface. This helped us understand the relationship between physical movement and digital response.</p>
+                    </div>
+                    
+                    <div class="process-item">
+                        <h4>Step 4: Group Discussion</h4>
+                        <p>We shared our gesture dictionary with the class, which led to interesting discussions about cultural differences in gestures and how the same movement might be interpreted differently across contexts.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Gesture Dictionary -->
+            <div class="gesture-analysis">
+                <h3>Gesture Dictionary</h3>
+                <p>Below are three gestures we documented and their potential applications in human-computer interaction:</p>
+                
+                <div class="grid-3">
+                    <figure class="image-box">
+                        <img src="../img/workshop/1-1.png" alt="Hug Gesture">
+                        <figcaption>Hug</figcaption>
+                    </figure>
+                    <figure class="image-box">
+                        <img src="../img/workshop/1-2.png" alt="Take a Photo Gesture">
+                        <figcaption>Take a Photo</figcaption>
+                    </figure>
+                    <figure class="image-box">
+                        <img src="../img/workshop/1-3.png" alt="Play Game Gesture">
+                        <figcaption>Play Game</figcaption>
+                    </figure>
+                </div>
+                
+                <div class="gesture-description">
+                    <p>During our analysis, we found that gestures fall into several categories:</p>
+                    <ul>
+                        <li><strong>Intuitive gestures</strong> that mimic real-world actions (like the camera framing gesture)</li>
+                        <li><strong>Abstract gestures</strong> that have no direct real-world parallel but could be learned for specific functions</li>
+                        <li><strong>Emotional gestures</strong> that communicate feeling or intent (like the hugging gesture)</li>
+                    </ul>
+                    <p>We discussed how gestures could be made more accessible and inclusive, considering factors like physical ability and cultural context. This led to thoughtful conversations about designing interfaces that respond to diverse human needs and capabilities.</p>
+                </div>
+            </div>
+            
+            <!-- Speculative HCI Section -->
+            <div class="section">
+                <div class="section-header">
+                    <h3>Speculative Interfaces</h3>
+                    <p class="section-subtitle">Imagining Future Interactions</p>
+                </div>
+                
+                <p>Based on our gesture exploration, we designed three speculative interfaces that don't yet exist. These concepts imagine new ways humans might interact with technology:</p>
+                
+                <div class="speculative-interfaces">
+                    <div class="speculative-card">
+                        <div class="speculative-content">
+                            <h4 class="speculative-title">Mood Ring 2.0</h4>
+                            <p class="speculative-description">A wearable device that reads subtle body language and micro-expressions to detect the wearer's emotional state and adjusts environmental factors accordingly.</p>
+                            
+                            <div class="speculative-detail">
+                                <strong>What it's for:</strong> Wellness and mental health support through environmental adaptation.
+                            </div>
+                            
+                            <div class="speculative-detail">
+                                <strong>How it works:</strong> Using tiny cameras and heat sensors, it analyses facial expressions, breathing patterns, and posture changes to determine emotional states. When it detects stress, it might dim lights, play calming music, or suggest breathing exercises.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="speculative-card">
+                        <div class="speculative-content">
+                            <h4 class="speculative-title">Air Composer</h4>
+                            <p class="speculative-description">A spatial music creation interface that translates physical movements into musical elements without requiring any physical instruments.</p>
+                            
+                            <div class="speculative-detail">
+                                <strong>What it's for:</strong> Democratising music creation for people without traditional musical training.
+                            </div>
+                            
+                            <div class="speculative-detail">
+                                <strong>How it works:</strong> Ceiling-mounted sensors track hand movements in 3D space. Different gestures create different sounds; height controls pitch, speed controls tempo, and specific hand shapes trigger different instruments or effects.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="speculative-card">
+                        <div class="speculative-content">
+                            <h4 class="speculative-title">Silent Speaker</h4>
+                            <p class="speculative-description">A device that translates subtle throat movements and subvocalisations into audible speech without the user having to physically speak.</p>
+                            
+                            <div class="speculative-detail">
+                                <strong>What it's for:</strong> Assisting people with speech impairments, allowing for private communication in public spaces, and enabling communication in noise-restricted environments.
+                            </div>
+                            
+                            <div class="speculative-detail">
+                                <strong>How it works:</strong> A small wearable collar uses EMG sensors to detect the subtle muscle movements in the throat and jaw that occur when someone thinks about speaking. AI algorithms convert these patterns into synthesised speech delivered via a small speaker or connected device.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Workshop Reflection Section -->
+            <div class="reflection-box" style="margin-top: 60px;">
+                <h3>Workshop Reflection</h3>
+                <p>This workshop fundamentally changed my understanding of human-computer interaction by highlighting how our physical bodies and movements can form the basis of digital interfaces. Several key insights emerged:</p>
+                
+                <p><strong>1. Embodied Cognition:</strong> I realised that our understanding of technology is deeply rooted in our physical experiences. Many digital metaphors (like "dragging" files) come from physical actions, suggesting that the most intuitive interfaces build upon our embodied knowledge.</p>
+                
+                <p><strong>2. Cultural Considerations:</strong> During our group discussions, it became clear that gestures are culturally specific. What seems intuitive in one cultural context might be confusing or even offensive in another, highlighting the importance of inclusive design practices.</p>
+                
+                <p><strong>3. Future Directions:</strong> I'm particularly interested in exploring interfaces that respond to subtle, unconscious movements - perhaps technology that can interpret intention before we're even fully aware of it ourselves. This raises fascinating questions about agency and the boundaries between human and machine.</p>
+                
+                <p>Moving forward, I plan to incorporate these insights into my design work by prioritising natural, intuitive interactions that respect human physicality and cultural diversity.</p>
+            </div>
+        </section>
+    </div>
 </body>
 </html>

@@ -1,0 +1,662 @@
+/* 
+   Unified Styles for Web Design Portfolio
+   This CSS file contains all common styles used across Week 1-3 pages
+*/
+
+/* Google Font Imports */
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap');
+
+/* ========== BASE STYLES ========== */
+body {
+    background-color: #101010;
+    background-image: linear-gradient(45deg, #121D36 0%, #0A0A0A 100%);
+    color: white;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* ========== LAYOUT ========== */
+/* Main container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 30px;
+    position: relative;
+    z-index: 10;
+}
+
+/* Section styling */
+.section {
+    margin-bottom: 100px;
+    padding: 0;
+    background: transparent;
+}
+
+/* Header section */
+.header-section {
+    padding: 80px 0;
+    margin-bottom: 60px;
+    position: relative;
+    overflow: hidden;
+}
+
+.header-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(62, 138, 150, 0.1) 0%, rgba(247, 189, 99, 0.1) 100%);
+    z-index: -1;
+}
+
+.subtitle {
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #FFFFFF;
+    text-align: center;
+    margin: 0 auto 50px;
+    max-width: 800px;
+    position: relative;
+    padding-bottom: 30px;
+}
+
+.subtitle::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background-color: #F7BD63;
+}
+
+/* Grid layouts */
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+}
+
+/* Section headers */
+.section-header {
+    border-left: 5px solid #F7BD63;
+    padding-left: 20px;
+    margin-bottom: 50px;
+}
+
+.section-subtitle {
+    font-size: 16px;
+    color: #F7BD63;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0;
+}
+
+/* ========== TYPOGRAPHY ========== */
+h1, h2, h3, h4 {
+    font-family: 'Anton', sans-serif;
+    font-weight: normal;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+h1 {
+    font-size: 120px;
+    margin: 0 0 20px 0;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    text-align: center;
+    letter-spacing: -2px;
+    line-height: 0.9;
+    position: relative;
+    z-index: 1;
+}
+
+h2 {
+    font-size: 42px;
+    margin-bottom: 30px;
+    color: #F7BD63;
+    position: relative;
+    display: inline-block;
+    letter-spacing: 1px;
+}
+
+h2::after {
+    display: none;
+}
+
+h3 {
+    font-size: 32px;
+    margin: 70px 0 35px;
+    color: #3E8A96;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background-color: rgba(62, 138, 150, 0.5);
+}
+
+/* ========== COMPONENTS ========== */
+/* Name tag */
+.name-tag {
+    position: fixed;
+    bottom: 10px;
+    right: 20px;
+    font-size: 12px;
+    font-weight: lighter;
+    letter-spacing: 2px;
+    z-index: 100;
+    opacity: 0.7;
+}
+
+/* Back button */
+.back-button {
+    position: fixed;
+    top: 30px;
+    left: 30px;
+    background: #F7BD63;
+    color: #121D36;
+    padding: 12px 24px;
+    text-decoration: none;
+    font-size: 14px;
+    z-index: 100;
+    transition: all 0.3s ease;
+    font-family: 'Anton', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.back-button:hover {
+    background: white;
+    color: #121D36;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Image box styling */
+.image-box {
+    text-align: center;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    position: relative;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 10px 20px 0 20px;
+    border-radius: 8px;
+}
+
+.image-box:hover {
+    transform: translateY(-5px);
+}
+
+.image-box img {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+    object-fit: contain;
+    border-radius: 4px;
+    transition: transform 0.5s ease;
+    display: block;
+    margin: 0 auto;
+}
+
+.image-box:hover img {
+    transform: scale(1.03);
+}
+
+.image-box figcaption {
+    margin: 15px 0;
+    padding: 15px 0;
+    font-size: 16px;
+    color: #FFFFFF;
+    position: relative;
+    font-family: 'Anton', sans-serif;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Single image box styling */
+.single-image-box {
+    text-align: center;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    position: relative;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 8px;
+    margin: 0 auto;
+    max-width: 90%;
+}
+
+.single-image-box img {
+    width: 100%;
+    max-height: 500px;
+    object-fit: contain;
+    border-radius: 4px;
+    transition: transform 0.5s ease;
+}
+
+.single-image-box:hover {
+    transform: translateY(-5px);
+}
+
+.single-image-box figcaption {
+    margin: 15px 0 5px;
+    padding: 15px 0;
+    font-size: 18px;
+    color: #FFFFFF;
+    position: relative;
+    font-family: 'Anton', sans-serif;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Workshop container */
+.workshop-container, .crazy8-container {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 30px;
+    margin-top: 40px;
+}
+
+.workshop-description, .crazy8-description {
+    margin-bottom: 30px;
+}
+
+.crazy8-image {
+    width: 100%;
+    max-height: 600px;
+    object-fit: contain;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+/* Card styling (works for website-card, archive-card, interface-card) */
+.website-card, .archive-card, .interface-card {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, background 0.3s ease;
+    border-top: 4px solid #F7BD63;
+    position: relative;
+    overflow: hidden;
+}
+
+.website-card::before, .archive-card::before, .interface-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(247, 189, 99, 0.05) 0%, transparent 70%);
+    z-index: 0;
+}
+
+.website-card:hover, .archive-card:hover, .interface-card:hover {
+    transform: translateY(-5px);
+    background: rgba(18, 29, 54, 0.5);
+}
+
+.website-card h4, .archive-card h4, .interface-card h4 {
+    font-family: 'Anton', sans-serif;
+    font-size: 26px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #FFFFFF;
+    font-weight: normal;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.website-details, .archive-details, .interface-details {
+    flex: 1;
+    position: relative;
+    z-index: 1;
+}
+
+/* URL styling */
+.website-url, .archive-url, .jodi-url, .temu-url {
+    font-size: 14px;
+    color: #3E8A96;
+    margin-bottom: 15px;
+    word-break: break-all;
+}
+
+.website-url a, .archive-url a, .jodi-url a, .temu-url a {
+    color: #3E8A96;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.website-url a:hover, .archive-url a:hover, .jodi-url a:hover, .temu-url a:hover {
+    color: #F7BD63;
+    text-decoration: underline;
+}
+
+/* Description text */
+.website-description, .archive-description, .interface-text {
+    margin-bottom: 22px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 15px;
+}
+
+/* Card image styling */
+.website-image, .archive-image, .interface-image {
+    height: 180px;
+    overflow: hidden;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.website-image img, .archive-image img, .interface-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.website-card:hover .website-image img, 
+.archive-card:hover .archive-image img, 
+.interface-card:hover .interface-image img {
+    transform: scale(1.05);
+}
+
+/* Exhibition styling */
+.exhibition {
+    display: flex;
+    margin-bottom: 70px;
+    position: relative;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.exhibition:hover {
+    transform: translateY(-5px);
+}
+
+.exhibition:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    bottom: -35px;
+    left: 25%;
+    width: 50%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.exhibition-image {
+    flex: 0 0 45%;
+    position: relative;
+    overflow: hidden;
+}
+
+.exhibition-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+    transition: transform 0.5s ease;
+}
+
+.exhibition:hover .exhibition-image img {
+    transform: scale(1.05);
+}
+
+.exhibition-content {
+    flex: 0 0 55%;
+    padding: 0 0 0 40px;
+}
+
+.exhibition-title {
+    font-family: 'Anton', sans-serif;
+    font-size: 28px;
+    margin-bottom: 8px;
+    color: #FFFFFF;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.exhibition-subtitle {
+    font-size: 14px;
+    margin-bottom: 22px;
+    color: #F7BD63;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.exhibition-description {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.exhibition-description p {
+    margin-bottom: 15px;
+}
+
+/* Elements (for JODI and TEMU analysis) */
+.jodi-analysis, .temu-analysis {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 30px;
+    margin-top: 60px;
+}
+
+.jodi-header, .temu-header {
+    margin-bottom: 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 20px;
+}
+
+.jodi-description, .temu-description {
+    margin-bottom: 30px;
+}
+
+.jodi-elements, .temu-elements {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.jodi-element, .temu-element {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    padding: 20px;
+    transition: transform 0.3s ease;
+}
+
+.jodi-element:hover, .temu-element:hover {
+    transform: translateY(-5px);
+}
+
+.element-title {
+    color: #F7BD63;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.element-description {
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+/* TEMU specific elements */
+.temu-sections {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.temu-section {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    padding: 20px;
+    transition: transform 0.3s ease;
+}
+
+.temu-section:hover {
+    transform: translateY(-5px);
+}
+
+.section-title {
+    color: #F7BD63;
+    font-size: 18px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.color-palette {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.color-swatch {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.color-swatch::after {
+    content: attr(data-color);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-size: 11px;
+    padding: 4px 0;
+    text-align: center;
+}
+
+/* Organization method box */
+.organization-method {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    border-radius: 4px;
+    border-left: 3px solid #3E8A96;
+}
+
+.organization-title {
+    font-weight: bold;
+    color: #F7BD63;
+    margin-bottom: 8px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Week-specific styles */
+/* These will be automatically added by each HTML page */
+h1.week1::after {
+    content: 'WEEK 1';
+}
+
+h1.week2::after {
+    content: 'WEEK 2';
+}
+
+h1.week3::after {
+    content: 'WEEK 3';
+}
+
+h1::after {
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(247, 189, 99, 0.15);
+    z-index: -1;
+    font-size: 130px;
+}
+
+/* ========== RESPONSIVE STYLES ========== */
+@media (max-width: 900px) {
+    .website-cards, .archive-cards, .temu-sections, .temu-elements, .jodi-elements, .grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .interface-cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .website-cards, .archive-cards, .temu-sections, .temu-elements, .jodi-elements, .grid-3, .grid-2 {
+        grid-template-columns: 1fr;
+    }
+
+    .exhibition {
+        flex-direction: column;
+    }
+
+    .exhibition-image {
+        height: 250px;
+        margin-bottom: 20px;
+    }
+    
+    .exhibition-content {
+        padding: 0;
+    }
+    
+    h1 {
+        font-size: 70px;
+    }
+    
+    h1::after {
+        font-size: 80px;
+    }
+    
+    .jodi-images {
+        grid-template-columns: 1fr;
+    }
+    
+    .design-sketches {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 50px;
+    }
+    
+    h1::after {
+        font-size: 60px;
+    }
+}
