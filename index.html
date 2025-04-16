@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio Music Player</title>
+    <!-- Include p5.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+    <!-- Include p5.sound library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.min.js"></script>
     <style>
         .name-tag {
             position: absolute;
@@ -13,6 +17,7 @@
             font-weight: lighter;
             letter-spacing: 2px;
             z-index: 10;
+            color: white;
         }
         
         body {
@@ -27,10 +32,11 @@
             background-size: cover;
             color: white;
             font-family: Arial, sans-serif;
+            transition: background 1s ease;
         }
 
-        /* Particle canvas styling */
-        #particle-canvas {
+        /* p5js canvas */
+        #p5-canvas {
             position: fixed;
             top: 0;
             left: 0;
@@ -42,14 +48,22 @@
 
         .music-player {
             position: relative;
-            background: transparent;
+            background: rgba(0, 0, 0, 0.4);
             width: 300px;
             padding: 20px;
             text-align: center;
             border-radius: 20px;
-            box-shadow: none;
-            border: 2px solid white;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
             z-index: 5;
+            transition: all 0.5s ease;
+        }
+
+        body.week4-plus .music-player {
+            background: rgba(0, 0, 0, 0.6);
+            border-color: rgba(247, 189, 99, 0.8);
+            box-shadow: 0 8px 32px rgba(247, 189, 99, 0.2);
         }
 
         .screen {
@@ -62,6 +76,7 @@
             border-radius: 10px;
             margin-bottom: 15px;
             overflow: hidden;
+            position: relative;
         }
 
         .screen img {
@@ -69,6 +84,11 @@
             height: 100%;
             object-fit: cover;
             border-radius: 8px;
+            transition: transform 0.5s ease;
+        }
+
+        .screen:hover img {
+            transform: scale(1.05);
         }
 
         .controls {
@@ -94,6 +114,10 @@
             transition: 0.3s;
         }
 
+        body.week4-plus .control-button {
+            border-color: #F7BD63;
+        }
+
         .control-button img.icon {
             width: 24px;  /* Default size for all icons */
             height: 24px;
@@ -115,6 +139,10 @@
             color: white;
         }
 
+        body.week4-plus .control-button:hover {
+            background: #F7BD63;
+        }
+
         button {
             background: #fefeff;
             border: none;
@@ -129,68 +157,127 @@
             align-items: center;
             gap: 20px;
         }
-        .sound-wave {
+
+        /* Volume control */
+        .volume-control {
             position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
-            flex-direction: row;
-            gap: 30px;
             align-items: center;
-            justify-content: center;
+            gap: 10px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 5px 15px;
+            border-radius: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        body.week4-plus .music-player:hover .volume-control {
+            opacity: 1;
+        }
+
+        .volume-icon {
+            width: 20px;
+            height: 20px;
+            filter: invert(1);
+        }
+
+        .volume-slider {
+            width: 100px;
+            height: 5px;
+            -webkit-appearance: none;
+            background: rgba(255, 255, 255, 0.3);
+            outline: none;
+            border-radius: 10px;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #F7BD63;
+            cursor: pointer;
+        }
+
+        /* Now playing indicator */
+        .now-playing {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 5px 10px;
+            border-radius: 15px;
+            display: none;
+            align-items: center;
+            gap: 8px;
+        }
+
+        body.week4-plus .now-playing {
+            display: flex;
+        }
+
+        .pulse {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #F7BD63;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(0.8); opacity: 0.5; }
+        }
+
+        /* Week title styling with better transitions */
+        h2#weekTitle {
+            margin: 10px 0 20px;
+            font-size: 28px;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        body.week4-plus h2#weekTitle {
+            color: #F7BD63;
+        }
+
+        h2#weekTitle::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #F7BD63;
+            transition: width 0.5s ease;
+        }
+
+        body.week4-plus h2#weekTitle::after {
             width: 100%;
         }
-
-        .left-wave {
-            left: -350px;
-        }
-
-        .right-wave {
-            right: -350px;
-        }
-
-        .bar {
-            width: 18px;
-            height: 100px;
-            background: white;
-            border-radius: 100px;
-            animation: wave 1s infinite ease-in-out;
-        }
-
-        @keyframes wave {
-            0%, 100% {
-                transform: scaleY(0.5);
-                opacity: 0.6;
-            }
-            50% {
-                transform: scaleY(1.5);
-                opacity: 1;
-            }
-        }
-
-        /* Left wave animation delays */
-        .left-wave .bar:nth-child(1) { animation-delay: 0s; }
-        .left-wave .bar:nth-child(2) { animation-delay: 0.15s; }
-        .left-wave .bar:nth-child(3) { animation-delay: 0.3s; }
-        .left-wave .bar:nth-child(4) { animation-delay: 0.45s; }
-        .left-wave .bar:nth-child(5) { animation-delay: 0.6s; }
-
-        /* Right wave animation delays (out of sync with left) */
-        .right-wave .bar:nth-child(1) { animation-delay: 0.6s; }
-        .right-wave .bar:nth-child(2) { animation-delay: 0.45s; }
-        .right-wave .bar:nth-child(3) { animation-delay: 0.3s; }
-        .right-wave .bar:nth-child(4) { animation-delay: 0.15s; }
-        .right-wave .bar:nth-child(5) { animation-delay: 0s; }
     </style>
 </head>
 <body>
-    <canvas id="particle-canvas"></canvas>
+    <div id="p5-canvas"></div>
     <div class="name-tag">Winter Park | 1266782</div>
 
     <!-- music player -->
     <div class="music-player">
         <div class="screen">
             <img id="weekImage" src="./Workbook/img/weekly-preview/week1.png" alt="Week 1">
+            <div class="now-playing">
+                <div class="pulse"></div>
+                <span>Now Playing</span>
+            </div>
         </div>
         
         <h2 id="weekTitle">WEEK 1</h2>
@@ -207,47 +294,409 @@
             </button>
         </div>
         
-        
-
-        <!-- Left sound wave -->
-        <div class="sound-wave left-wave">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
+        <!-- Volume control -->
+        <div class="volume-control">
+            <img src="./Workbook/img/volume.png" alt="Volume" class="volume-icon" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLXZvbHVtZS0yIj48cG9seWdvbiBwb2ludHM9IjExIDUgNiA5IDIgOSAyIDE1IDYgMTUgMTEgMTkgMTEgNSI+PC9wb2x5Z29uPjxwYXRoIGQ9Ik0xOS4wNyA0LjkzYTEwIDEwIDAgMCAxIDAgMTQuMTQiPjwvcGF0aD48cGF0aCBkPSJNMTUuNTQgOC40NmE1IDUgMCAwIDEgMCA3LjA3Ij48L3BhdGg+PC9zdmc+'">
+            <input type="range" class="volume-slider" id="volume-slider" min="0" max="1" step="0.01" value="0.7">
         </div>
-        <!-- right sound wave -->
-        <div class="sound-wave right-wave">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-        </div>
-
-        <audio id="bg-music" autoplay loop>
-            <source src="./Workbook/img/NAN CHUN.mp3" type="audio/mpeg">
-            Your browser does not support the audio element.
-        </audio>
     </div>
 
     <script>
+        // Week data with music tracks
         const weeks = [
-            { title: "WEEK 1", img: "./Workbook/img/weekly-preview/week1.png", link: "./Workbook/Week1/index.html" },
-            { title: "WEEK 2", img: "./Workbook/img/weekly-preview/week2.png", link: "./Workbook/Week2/index.html" },
-            { title: "WEEK 3", img: "./Workbook/img/weekly-preview/week3.png", link: "./Workbook/Week3/index.html" }
+            { 
+                title: "WEEK 1", 
+                img: "./Workbook/img/weekly-preview/week1.png", 
+                link: "./Workbook/Week1/index.html",
+                background: "./Workbook/img/weekly-background/week1bg.png",
+                music: "./Workbook/music/bgmusic.mp3"  // updated music path
+            },
+            { 
+                title: "WEEK 2", 
+                img: "./Workbook/img/weekly-preview/week2.png", 
+                link: "./Workbook/Week2/index.html",
+                background: "./Workbook/img/weekly-background/week2bg.png",
+                music: "./Workbook/music/bgmusic.mp3"  // updated music path
+            },
+            { 
+                title: "WEEK 3", 
+                img: "./Workbook/img/weekly-preview/week3.png", 
+                link: "./Workbook/Week3/index.html",
+                background: "./Workbook/img/weekly-background/week3bg.png",
+                music: "./Workbook/music/bgmusic.mp3"  // updated music path
+            },
+            { 
+                title: "WEEK 4", 
+                img: "./Workbook/img/weekly-preview/week4.png", 
+                link: "./Workbook/Week4/index.html",
+                background: "./Workbook/img/weekly-background/week4bg.png",
+                music: "./Workbook/music/wk4music.mp3"  // updated music path
+            },
+            { 
+                title: "WEEK 5", 
+                img: "./Workbook/img/weekly-preview/week5.png", 
+                link: "./Workbook/Week5/index.html",
+                background: "./Workbook/img/weekly-background/week5bg.png",
+                music: "./Workbook/music/wk5music.mp3"  // updated music path
+            },
+            { 
+                title: "WEEK 6", 
+                img: "./Workbook/img/weekly-preview/week6.png", 
+                link: "./Workbook/Week6/index.html",
+                background: "./Workbook/img/weekly-background/week6bg.png",
+                music: "./Workbook/music/wk6music.mp3"  // updated music path
+            }
         ];
         
         let currentIndex = 0;
+        let sound; // p5.js sound object
+        let fft; // p5.js FFT analyzer
+        let initialized = false;
+        let amplitude; // For volume detection
+        let particles = []; // Array to hold particles
+        let currentMusicTrack = ""; // Track the current music file path
+        let gain; // Volume control node
+        
+        // p5.js sketch
+        const sketch = (p) => {
+            class Particle {
+                constructor() {
+                    this.x = p.random(p.width);
+                    this.y = p.random(p.height);
+                    this.size = p.random(1, 4); // Smaller size
+                    this.baseX = this.x;
+                    this.baseY = this.y;
+                    this.density = p.random(20, 70);
+                    this.glowSize = this.size * 2.5; // Smaller glow
+                    this.glowIntensity = p.random(0.06, 0.15); // Lower intensity
+                    this.glowSpeed = p.random(0.005, 0.02);
+                    this.glowAngle = p.random(p.TWO_PI);
+                    // Color properties for Week 4+ mode
+                    this.colorMode = 0; // 0 for white, 1 for teal, 2 for gold
+                    this.tealColor = p.color(62, 138, 150);
+                    this.goldColor = p.color(247, 189, 99);
+                    this.whiteColor = p.color(255, 255, 255);
+                    this.currentColor = this.whiteColor;
+                }
+                
+                update(mouseX, mouseY, audioLevel = 0) {
+                    // Update glow animation
+                    this.glowAngle += this.glowSpeed;
+                    
+                    // Calculate distance to mouse
+                    const dx = mouseX - this.x;
+                    const dy = mouseY - this.y;
+                    const distance = p.sqrt(dx * dx + dy * dy);
+                    
+                    // Apply force based on mouse position
+                    if (distance < 100) {
+                        const forceDirectionX = dx / distance;
+                        const forceDirectionY = dy / distance;
+                        const force = (100 - distance) / 100;
+                        const directionX = forceDirectionX * force * this.density;
+                        const directionY = forceDirectionY * force * this.density;
+                        
+                        this.x -= directionX;
+                        this.y -= directionY;
+                    } else {
+                        // Return to original position
+                        if (this.x !== this.baseX) {
+                            const dx = this.x - this.baseX;
+                            this.x -= dx / 10;
+                        }
+                        if (this.y !== this.baseY) {
+                            const dy = this.y - this.baseY;
+                            this.y -= dy / 10;
+                        }
+                    }
+                    
+                    // For Week 4+, add audio reactivity
+                    if (currentIndex >= 3 && sound && sound.isPlaying()) {
+                        // Choose color based on position and audio
+                        const energy = fft.getEnergy("bass", "mid");
+                        const normalizedEnergy = p.map(energy, 0, 255, 0, 1);
+                        
+                        // Update color based on position in the screen
+                        const xPos = this.x / p.width;
+                        if (xPos < 0.33) {
+                            this.currentColor = this.tealColor;
+                        } else if (xPos < 0.66) {
+                            this.currentColor = this.goldColor;
+                        } else {
+                            this.currentColor = this.whiteColor;
+                        }
+                        
+                        // Adjust size based on audio
+                        this.glowSize = this.size * 2.5 * (1 + normalizedEnergy * 0.5);
+                    } else {
+                        this.currentColor = this.whiteColor;
+                    }
+                }
+                
+                draw() {
+                    // Calculate pulsing glow effect
+                    const glowFactor = (p.sin(this.glowAngle) * 0.1) + this.glowIntensity;
+                    
+                    // Draw the particle
+                    p.noStroke();
+                    
+                    // Inner glow (brighter)
+                    const c = p.color(this.currentColor);
+                    p.fill(p.red(c), p.green(c), p.blue(c), 30); // Lower opacity to 30%
+                    p.ellipse(this.x, this.y, this.glowSize, this.glowSize);
+                    
+                    // Bright center
+                    p.fill(p.red(c), p.green(c), p.blue(c), 40); // Slightly more opaque center
+                    p.ellipse(this.x, this.y, this.size, this.size);
+                }
+            }
+            
+            class SoundBar {
+                constructor(x, y, width, height, delay) {
+                    this.x = x;
+                    this.y = y;
+                    this.width = width;
+                    this.baseHeight = height;
+                    this.height = height;
+                    this.delay = delay;
+                    this.color = p.color(255);
+                    this.targetHeight = height;
+                    this.easing = 0.8; // How fast the bar moves to target
+                }
+                
+                update(audioData, barIndex, isRightSide = false) {
+                    if (currentIndex >= 3 && sound && sound.isPlaying()) {
+                        const spectrumMid = Math.floor(audioData.length / 2);
+                        const barsCount = 5;
+
+                        let index;
+                        if (isRightSide) {
+                            // Right bars → upper half
+                            index = Math.floor(p.map(barIndex, 0, barsCount - 1, spectrumMid-1, 0));
+                        } else {
+                            // Left bars → lower half
+                            index = Math.floor(p.map(barIndex, 0, barsCount - 1, 0, spectrumMid - 1));
+                        }
+
+                        const value = audioData[index];
+                        this.targetHeight = p.map(value, 0, 255, this.baseHeight * 0.5, this.baseHeight * 2);
+                        this.color = p.color(247, 189, 99);
+                    } else {
+                        this.targetHeight = this.baseHeight * (1 + 0.5 * p.sin(p.frameCount * 0.05 + this.delay));
+                        this.color = p.color(255);
+                    }
+
+                    this.height += (this.targetHeight - this.height) * this.easing;
+                }
+
+                
+                draw() {
+                    p.noStroke();
+                    p.fill(this.color);
+                    p.rect(this.x, this.y - this.height/2, this.width, this.height, this.width/2);
+                }
+            }
+            
+            // Left and right sound bars
+            let leftBars = [];
+            let rightBars = [];
+            
+            p.setup = function() {
+                p.createCanvas(p.windowWidth, p.windowHeight);
+                p.noStroke();
+                
+                // Initialize FFT analysis and amplitude for when music starts
+                fft = new p5.FFT(0.8, 128);
+                amplitude = new p5.Amplitude();
+                
+                // Create particles
+                for (let i = 0; i < 150; i++) {
+                    particles.push(new Particle());
+                }
+                
+                // Create sound bars (left side)
+                const leftBarX = p.width / 2 - 480; // Starting X position for left bars
+                for (let i = 0; i < 5; i++) {
+                    leftBars.push(new SoundBar(
+                        leftBarX + i * 50, // X position
+                        p.height / 2,     // Y position
+                        18,               // Width
+                        100,              // Base height
+                        i * 0.35          // Delay for animation
+                    ));
+                }
+                
+                // Create sound bars (right side)
+                const rightBarX = p.width / 2 + 250; // Starting X position for right bars
+                for (let i = 0; i < 5; i++) {
+                    rightBars.push(new SoundBar(
+                        rightBarX + i * 50, // X position
+                        p.height / 2,      // Y position
+                        18,                // Width
+                        100,               // Base height
+                        (4-i) * 0.35     // Reverse delay for animation
+                    ));
+                }
+            };
+            
+            p.draw = function() {
+                p.clear();
+                
+                // Get audio data if we have active music
+                let spectrum = [];
+                let level = 0;
+                if (initialized && sound && sound.isPlaying()) {
+                    spectrum = fft.analyze();
+                    level = amplitude.getLevel();
+                }
+                
+                // Update and draw particles
+                for (const particle of particles) {
+                    particle.update(p.mouseX, p.mouseY, level);
+                    particle.draw();
+                }
+                // Update and draw left bars
+                for (let i = 0; i < leftBars.length; i++) {
+                    leftBars[i].update(spectrum, i, false);  // false = left side
+                    leftBars[i].draw();
+                }
+
+                // Update and draw right bars
+                for (let i = 0; i < rightBars.length; i++) {
+                    rightBars[i].update(spectrum, i, true);  // true = right side
+                    rightBars[i].draw();
+                }
+
+                
+                // Week 4+ specific visualizations
+                if (currentIndex >= 3 && initialized && sound && sound.isPlaying()) {
+                    // Circular bass visualization
+                    const bassValue = fft.getEnergy("bass");
+                    const bassRadius = p.map(bassValue, 0, 255, 100, 300);
+                    
+                    p.push();
+                    p.translate(p.width/2, p.height/2);
+                    p.fill(62, 138, 150, 20); // Lower opacity
+                    p.ellipse(0, 0, bassRadius, bassRadius);
+                    p.pop();
+                    
+                    // Mid-high frequency visualization around the player
+                    const trebleValue = fft.getEnergy("treble");
+                    const trebleItems = 16;
+                    
+                    p.push();
+                    p.translate(p.width/2, p.height/2);
+                    
+                    for (let i = 0; i < trebleItems; i++) {
+                        const angle = p.map(i, 0, trebleItems, 0, p.TWO_PI);
+                        const radius = 200; // Distance from center
+                        const x = p.cos(angle) * radius;
+                        const y = p.sin(angle) * radius;
+                        const barHeight = p.map(trebleValue, 0, 255, 10, 40);
+                        
+                        p.push();
+                        p.translate(x, y);
+                        p.rotate(angle + p.HALF_PI);
+                        p.fill(247, 189, 99, 25); // Lower opacity
+                        p.rect(-5, -barHeight/2, 10, barHeight);
+                        p.pop();
+                    }
+                    p.pop();
+                }
+            };
+            p.windowResized = function() {
+                p.resizeCanvas(p.windowWidth, p.windowHeight);
+                
+                // Recalculate positions for sound bars - MAKE THESE MATCH YOUR SETUP
+                const leftBarX = p.width / 2 - 480;
+                for (let i = 0; i < leftBars.length; i++) {
+                    leftBars[i].x = leftBarX + i * 50;
+                    leftBars[i].y = p.height / 2;
+                }
+                
+                const rightBarX = p.width / 2 + 250;
+                for (let i = 0; i < rightBars.length; i++) {
+                    rightBars[i].x = rightBarX + i * 50;
+                    rightBars[i].y = p.height / 2;
+                }
+            };
+        };
+        
+        // Initialize p5.js sketch
+        new p5(sketch, 'p5-canvas');
+        
+        // Load and play the appropriate music
+        function loadMusic(src) {
+            // If the music is already loaded and playing, and it's the same track, don't reload it
+            if (currentMusicTrack === src && sound && sound.isPlaying()) {
+                return;
+            }
+            
+            // Track the current music file path
+            currentMusicTrack = src;
+            
+            // If we have a previous sound, stop it first
+            if (sound && sound.isPlaying()) {
+                sound.stop();
+            }
+            
+            // Create new sound object and play once loaded
+            sound = new p5.SoundFile(src, 
+                () => {
+                    // ✅ Initialize gain if not done
+                    if (!gain) {
+                        gain = new p5.Gain();
+                        gain.connect(); // Connect to master output
+                    }
+
+                    sound.disconnect();       // disconnect from default output
+                    sound.connect(gain);      // connect through gain
+                    gain.amp(0.7);            // initial volume
+
+                    sound.loop();
+                    initialized = true;
+
+                    // Update volume slider
+                    document.getElementById('volume-slider').value = 0.7;
+
+                    // ✅ Connect FFT to gain instead of sound
+                    fft.setInput(gain);
+                },
+
+                // Error callback
+                (err) => {
+                    console.error("Error loading sound:", err);
+                    // Fallback logic - if music fails to load, use default
+                    if (src !== weeks[0].music) {
+                        loadMusic(weeks[0].music);
+                    }
+                }
+            );
+        }
         
         function updateDisplay() {
+            // Update image, title, and link
             document.getElementById("weekImage").src = weeks[currentIndex].img;
             document.getElementById("weekTitle").innerText = weeks[currentIndex].title;
             document.getElementById("play").setAttribute("data-link", weeks[currentIndex].link);
+            
+            // Update background image
+            if (weeks[currentIndex].background) {
+                document.body.style.backgroundImage = `url('${weeks[currentIndex].background}')`;
+            }
+            
+            // Check if we're in week 4 or beyond
+            if (currentIndex >= 3) {
+                document.body.classList.add('week4-plus');
+            } else {
+                document.body.classList.remove('week4-plus');
+            }
+            
+            // Always load the appropriate music for the current week
+            loadMusic(weeks[currentIndex].music);
         }
 
-
+        // Handle navigation buttons
         document.getElementById("prev").addEventListener("click", () => {
             if (currentIndex > 0) {
                 currentIndex--;
@@ -268,136 +717,18 @@
                 window.location.href = link;
             }
         });
-        updateDisplay(); 
+        
+        // Handle volume slider change
+        document.getElementById("volume-slider").addEventListener("input", (e) => {
+            const vol = parseFloat(e.target.value);
+            if (gain) {
+                gain.amp(vol, 0.1); // smooth volume change
+            }
+        });
 
-        // Particle effect code
-        const canvas = document.getElementById('particle-canvas');
-        const ctx = canvas.getContext('2d');
         
-        // Set canvas to full window size
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        
-        // Mouse position tracking
-        let mouseX = canvas.width / 2;
-        let mouseY = canvas.height / 2;
-        
-        // Track mouse position
-        document.addEventListener('mousemove', function(e) {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
-        
-        // Particle class
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 0.5; // Smaller size
-                this.baseX = this.x;
-                this.baseY = this.y;
-                this.density = Math.random() * 30 + 1;
-                this.glowSize = this.size * 3; // Size of the glow effect
-                
-                // Properties for smooth glow animation
-                this.glowIntensity = Math.random() * 0.3 + 0.2; // Base glow intensity
-                this.glowSpeed = Math.random() * 0.01 + 0.005; // How fast the glow changes
-                this.glowAngle = Math.random() * Math.PI * 2; // Random starting point in the sine wave
-            }
-            
-            draw() {
-                // Calculate smooth pulsing glow (sine wave oscillation)
-                this.glowAngle += this.glowSpeed;
-                // Sine wave oscillates between -1 and 1, we adjust to create a glow intensity that varies subtly
-                const glowFactor = (Math.sin(this.glowAngle) * 0.15) + this.glowIntensity;
-                
-                // Create radial gradient for glow effect
-                const gradient = ctx.createRadialGradient(
-                    this.x, this.y, 0,
-                    this.x, this.y, this.glowSize
-                );
-                
-                // Inner glow (brighter)
-                gradient.addColorStop(0, `rgba(255, 255, 255, ${glowFactor + 0.1})`);
-                // Outer glow (fades out)
-                gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
-                
-                // Draw the glowing particle
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.glowSize, 0, Math.PI * 2);
-                ctx.fillStyle = gradient;
-                ctx.fill();
-            }
-            
-            update() {
-                // Calculate distance between particle and mouse
-                const dx = mouseX - this.x;
-                const dy = mouseY - this.y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-                
-                // Set movement force
-                const forceDirectionX = dx / distance;
-                const forceDirectionY = dy / distance;
-                
-                // Set max distance the particles will move
-                const maxDistance = 100;
-                
-                // Calculate force to apply (stronger when closer)
-                let force = (maxDistance - distance) / maxDistance;
-                if (force < 0) force = 0;
-                
-                // Apply force with delay (makes it more fluid)
-                const directionX = forceDirectionX * force * this.density;
-                const directionY = forceDirectionY * force * this.density;
-                
-                // Move the particle if it's within max distance
-                if (distance < maxDistance) {
-                    this.x -= directionX;
-                    this.y -= directionY;
-                } else {
-                    // Return to original position
-                    if (this.x !== this.baseX) {
-                        const dx = this.x - this.baseX;
-                        this.x -= dx / 10;
-                    }
-                    if (this.y !== this.baseY) {
-                        const dy = this.y - this.baseY;
-                        this.y -= dy / 10;
-                    }
-                }
-            }
-        }
-        
-        // Create particle array
-        const particleCount = 150; // Increased for better effect with smaller particles
-        const particles = [];
-        
-        function init() {
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
-            }
-        }
-        
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            for (const particle of particles) {
-                particle.draw();
-                particle.update();
-            }
-            
-            requestAnimationFrame(animate);
-        }
-        
-        // Handle window resize
-        window.addEventListener('resize', function() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
-        
-        // Initialize particles and start animation
-        init();
-        animate();
+        // Initialize the display and start with default music
+        updateDisplay();
     </script>
 </body>
 </html>
