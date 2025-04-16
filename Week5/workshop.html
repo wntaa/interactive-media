@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 5 - Workshop</title>
+    <link rel="stylesheet" href="../../style.css">
+    <style>
+        .reference-link {
+            display: inline-block;
+            margin-top: 20px;
+            background-color: #3E8A96;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        
+        .reference-link:hover {
+            background-color: #F7BD63;
+            color: #121D36;
+        }
+        
+        .summary-box {
+            background-color: #234975;
+            border-left: 4px solid #F7BD63;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            color: white;
+        }
+        
+        .summary-box h3 {
+            color: #F7BD63;
+            margin-top: 0;
+        }
+        
+        .summary-list {
+            margin-top: 15px;
+        }
+        
+        .summary-list li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="name-tag">Winter Park | 1266782</div>
+    <a href="../../index.html" class="back-button">Back to Player</a>
+
+    <div class="container">
+        <div class="header-section">
+            <h1>Week 5</h1>
+            <p class="subtitle">IMAGE & SOUND IN P5.JS</p>
+        </div>
+        
+        <!-- Workshop Section --> 
+        <section class="section">
+            <div class="section-header">
+                <h2>Workshop</h2>
+                <p class="section-subtitle">Image & Sound Integration</p>
+            </div>
+            
+            <div class="workshop-container">
+                <div class="workshop-description">
+                    <p>In Week 5, we focused on advanced P5.js techniques for working with images, video, and webcam input. Rather than a separate workshop activity, the practical application of these concepts is documented in my coding workbook. This includes demonstrations of image manipulation, webcam integration, and interactive visual elements.</p>
+                    
+                    <div class="summary-box">
+                        <h3>Key Techniques Covered</h3>
+                        <ul class="summary-list">
+                            <li><strong>Image Loading & Display:</strong> Techniques for importing and displaying images within P5.js sketches</li>
+                            <li><strong>Webcam Integration:</strong> Methods for capturing and manipulating live video input</li>
+                            <li><strong>Filter Effects:</strong> Application of visual filters to images and video feeds</li>
+                            <li><strong>Pointillism Effect:</strong> Creating artistic interpretations of images using dots and circles</li>
+                            <li><strong>Interactive Elements:</strong> Combining image processing with user interaction</li>
+                        </ul>
+                    </div>
+                    
+                    <p>For detailed code examples, explanations, and interactive demonstrations, please refer to my Week 5 coding documentation:</p>
+                    
+                    <a href="./coding.html" class="reference-link">View Week 5 Coding Workbook</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Concepts Section -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Related Concepts</h2>
+                <p class="section-subtitle">Image Processing in Creative Coding</p>
+            </div>
+            
+            <div class="concepts-content">
+                <p>The techniques explored in Week 5 connect to broader concepts in creative coding and digital art:</p>
+                
+                <div class="summary-box">
+                    <h3>Applications & Extensions</h3>
+                    <ul class="summary-list">
+                        <li><strong>Computer Vision:</strong> The webcam techniques serve as an introduction to more advanced computer vision applications, where software analyzes and interprets visual input.</li>
+                        <li><strong>Digital Mirrors:</strong> Building on our "Mirror Mirror" exploration from the pre-workshop, these techniques allow for creative reinterpretations of the viewer's image.</li>
+                        <li><strong>Procedural Art:</strong> Image manipulation algorithms connect to procedural and generative art practices, where visual outputs are created through computational processes.</li>
+                        <li><strong>Interactive Installations:</strong> The combination of visual input and real-time processing provides a foundation for creating responsive art installations.</li>
+                    </ul>
+                </div>
+                
+                <p>These image processing techniques could be combined with the sound integration concepts from Week 6 to create multisensory interactive experiences that respond to both visual and audio input.</p>
+            </div>
+        </section>
+        
+        <!-- Implementation Notes Section -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Implementation Notes</h2>
+                <p class="section-subtitle">Technical Considerations</p>
+            </div>
+            
+            <div class="notes-content">
+                <p>When working with image and video processing in P5.js, several technical considerations are important:</p>
+                
+                <div class="summary-box">
+                    <h3>Technical Notes</h3>
+                    <ul class="summary-list">
+                        <li><strong>Browser Permissions:</strong> Webcam access requires explicit user permission in most browsers, which must be handled gracefully in the code.</li>
+                        <li><strong>Performance Optimization:</strong> Image processing can be computationally intensive, especially with larger images or complex filters. Techniques like downsampling or processing only on specific events can improve performance.</li>
+                        <li><strong>Cross-Origin Issues:</strong> Loading images from external sources requires addressing cross-origin resource sharing (CORS) considerations.</li>
+                        <li><strong>Mobile Compatibility:</strong> Different devices handle camera access differently, requiring testing across platforms for consistent behavior.</li>
+                    </ul>
+                </div>
+                
+                <p>The integration of these techniques into creative projects requires balancing technical implementation with artistic intent, ensuring that the code not only functions correctly but also achieves the desired aesthetic outcome.</p>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

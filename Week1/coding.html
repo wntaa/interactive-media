@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 1 - Code Learning</title>
+    <link rel="stylesheet" href="../../style.css">
+    <style>
+        /* Code section specific styles */
+        .code-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+        
+        .code-display {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .code-header {
+            background: rgba(35, 73, 117, 0.8);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .code-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .code-dots {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .code-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .code-dot.red {
+            background-color: #FF5F56;
+        }
+        
+        .code-dot.yellow {
+            background-color: #FFBD2E;
+        }
+        
+        .code-dot.green {
+            background-color: #27C93F;
+        }
+        
+        .code-content {
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        
+        .code-content pre {
+            margin: 0;
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #E0E0E0;
+            white-space: pre-wrap;
+        }
+        
+        .code-content code {
+            color: #E0E0E0;
+        }
+        
+        .code-keyword {
+            color: #F7BD63;
+        }
+        
+        .code-tag {
+            color: #3E8A96;
+        }
+        
+        .code-attribute {
+            color: #F7BD63;
+        }
+        
+        .code-string {
+            color: #A5D6A7;
+        }
+        
+        .code-comment {
+            color: #787878;
+        }
+        
+        /* Result Preview */
+        .preview-container {
+            background: white;
+            color: black;
+            border-radius: 8px;
+            padding: 20px;
+            height: 600px;
+            overflow-y: auto;
+        }
+        
+        .preview-container .weekone {
+            max-width: 100%;
+        }
+        
+        .preview-container h1 {
+            font-size: 36px;
+            color: black;
+            text-align: left;
+            margin-bottom: 10px;
+        }
+        
+        .preview-container h1::after {
+            display: none;
+        }
+        
+        .preview-container h2 {
+            font-size: 24px;
+            color: black;
+            margin-bottom: 15px;
+        }
+        
+        .preview-container p {
+            font-family: sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        
+        .preview-container img {
+            max-width: 100%;
+            height: auto;
+            margin: 15px 0;
+        }
+        
+        .preview-container button {
+            padding: 8px 16px;
+            background-color: #F7BD63;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: sans-serif;
+            margin: 10px 0;
+        }
+        
+        .preview-container section {
+            display: flex;
+            flex-direction: row;
+            margin: 20px 0;
+            gap: 30px;
+            line-height: 1.4;
+            font-size: 16px;
+        }
+        
+        /* Learning points */
+        .learning-points {
+            margin-top: 60px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            padding: 30px;
+            border-left: 5px solid #3E8A96;
+        }
+        
+        .learning-points h3 {
+            margin-top: 0;
+            color: white;
+        }
+        
+        .learning-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .learning-item {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 8px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        
+        .learning-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .learning-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #3E8A96, #F7BD63);
+            border-radius: 8px 8px 0 0;
+        }
+        
+        .learning-item h4 {
+            margin-top: 10px;
+            margin-bottom: 15px;
+            color: #F7BD63;
+            font-size: 18px;
+        }
+        
+        .learning-item p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Development Process */
+        .dev-process {
+            margin-top: 60px;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 30px auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: rgba(255, 255, 255, 0.2);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #F7BD63;
+            border: 4px solid #3E8A96;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-item:nth-child(odd)::after {
+            right: -12px;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            left: -12px;
+        }
+
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: rgba(0, 0, 0, 0.3);
+            position: relative;
+            border-radius: 6px;
+        }
+
+        .challenges {
+            margin-top: 60px;
+            background: rgba(255, 123, 0, 0.1);
+            border-radius: 8px;
+            padding: 30px;
+            border-left: 5px solid #FF7B00;
+        }
+
+        .challenge-item {
+            margin-bottom: 30px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .challenge-solution {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed rgba(255, 255, 255, 0.2);
+        }
+
+        .file-structure {
+            margin-top: 60px;
+        }
+
+        .folder-structure {
+            font-family: monospace;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 8px;
+            color: white;
+            line-height: 1.5;
+            margin-top: 20px;
+        }
+
+        .folder {
+            margin-left: 20px;
+        }
+
+        .file {
+            margin-left: 40px;
+            color: #A5D6A7;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 900px) {
+            .code-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .learning-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            h1 {
+                font-size: 80px;
+            }
+            
+            h1::after {
+                font-size: 90px;
+            }
+
+            .timeline::after {
+                left: 31px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+
+            .timeline-item::after {
+                left: 20px;
+            }
+
+            .timeline-item:nth-child(odd)::after {
+                right: auto;
+                left: 20px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .learning-list {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 60px;
+            }
+            
+            h1::after {
+                font-size: 70px;
+            }
+            
+            .preview-container section {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="name-tag">Winter Park | 1266782</div>
+    <a href="../../index.html" class="back-button">Back to Player</a>
+
+    <div class="container">
+        <div class="header-section">
+            <h1>Coding</h1>
+            <p class="subtitle">LEARNING THE FUNDAMENTALS OF HTML AND EXPLORING THE BUILDING BLOCKS OF WEB DEVELOPMENT THROUGH HANDS-ON EXERCISES AND PRACTICAL IMPLEMENTATION.</p>
+        </div>
+        
+        <section class="section">
+            <div class="section-header">
+                <h2>HTML Basics</h2>
+                <p class="section-subtitle">My First Webpage</p>
+            </div>
+            
+            <div class="code-container">
+                <div class="code-display">
+                    <div class="code-header">
+                        <div class="code-title">HTML Source Code</div>
+                        <div class="code-dots">
+                            <div class="code-dot red"></div>
+                            <div class="code-dot yellow"></div>
+                            <div class="code-dot green"></div>
+                        </div>
+                    </div>
+                    <div class="code-content">
+                        <pre><code><span class="code-tag">&lt;!DOCTYPE html&gt;</span>
+<span class="code-tag">&lt;html</span> <span class="code-attribute">lang</span>=<span class="code-string">"en-GB"</span><span class="code-tag">&gt;</span>
+<span class="code-tag">&lt;head&gt;</span>
+<span class="code-tag">&lt;meta</span> <span class="code-attribute">charset</span>=<span class="code-string">"UTF-8"</span> <span class="code-tag">/&gt;</span>
+<span class="code-tag">&lt;meta</span> <span class="code-attribute">name</span>=<span class="code-string">"viewport"</span> <span class="code-attribute">content</span>=<span class="code-string">"width=device-width, initial-scale=1.0"</span> <span class="code-tag">/&gt;</span>
+<span class="code-tag">&lt;title&gt;</span>Basic Page<span class="code-tag">&lt;/title&gt;</span>
+<span class="code-tag">&lt;/head&gt;</span>
+<span class="code-tag">&lt;body&gt;</span>
+<span class="code-tag">&lt;div</span> <span class="code-attribute">class</span>=<span class="code-string">"weekone"</span><span class="code-tag">&gt;</span>
+<span class="code-tag">&lt;h1&gt;</span>Interactive Media<span class="code-tag">&lt;/h1&gt;</span>
+<span class="code-tag">&lt;h2&gt;</span>Week 1<span class="code-tag">&lt;/h2&gt;</span>
+<span class="code-tag">&lt;strong&gt;</span>Hello World<span class="code-tag">&lt;/strong&gt;</span>
+<span class="code-tag">&lt;p&gt;</span>
+    We learnt the basics of HTML like <span class="code-tag">&lt;em&gt;</span>inserting images, 
+    italic font<span class="code-tag">&lt;/em&gt;</span> and we familiarised ourselves with what 
+    code looks like. 
+<span class="code-tag">&lt;/p&gt;</span>
+<span class="code-tag">&lt;button</span> <span class="code-attribute">onclick</span>=<span class="code-string">"showAlert()"</span><span class="code-tag">&gt;</span>Click!<span class="code-tag">&lt;/button&gt;</span>
+<span class="code-tag">&lt;/br&gt;</span>
+
+<span class="code-tag">&lt;img
+src</span>=<span class="code-string">"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy8AVzxQmvj4qlUJA9WZG_vXF5OQO8pbBP5w&usqp=CAU"</span>
+<span class="code-tag">/&gt;</span>
+<span class="code-tag">&lt;/div&gt;</span>
+
+<span class="code-comment">&lt;!-- button alert function --&gt;</span>
+<span class="code-tag">&lt;script&gt;</span>
+    <span class="code-keyword">function</span> showAlert() {
+        alert(<span class="code-string">"This button does nothing."</span>);
+    }
+<span class="code-tag">&lt;/script&gt;</span>
+
+<span class="code-comment">&lt;!-- column --&gt;</span>
+<span class="code-tag">&lt;section
+style</span>=<span class="code-string">"
+display: flex;
+flex-direction: row;
+margin: 20px;
+gap: 30px;
+line-height: 45px;
+font-size: 30px;
+"</span>
+<span class="code-tag">&gt;</span>
+<span class="code-tag">&lt;div&gt;</span>
+<span class="code-tag">&lt;i&gt;</span>Evil Media<span class="code-tag">&lt;/i&gt;</span> is an attempt to develop an understanding of
+contemporary media systems, techniques, and practices of mediation in an
+era of participation, of massive
+networks in which contests are waged as much between technical systems
+as between ideas
+or more ostensibly social forces, and in which such conflicts in turn
+<span class="code-tag">&lt;strong&gt;</span>ramify<span class="code-tag">&lt;/strong&gt;</span>
+<span class="code-tag">&lt;/div&gt;</span>
+<span class="code-tag">&lt;div&gt;</span>
+passions, projects, and plans. Much of what we will discuss are the
+<span class="code-tag">&lt;q&gt;</span>grey media<span class="code-tag">&lt;/q&gt;</span> most recognisable from the world of work and
+administration, affecting the habits of government, business, and
+culture, yet rarely recognised or explored as media in their own right.
+<span class="code-tag">&lt;/div&gt;</span>
+<span class="code-tag">&lt;/section&gt;</span>
+<span class="code-tag">&lt;div&gt;</span>
+Excerpt from <span class="code-tag">&lt;em&gt;</span>Evil Media<span class="code-tag">&lt;/em&gt;</span>, by Matthew Fuller and Andrew Goffrey
+<span class="code-tag">&lt;/div&gt;</span>
+
+<span class="code-tag">&lt;/body&gt;</span>
+<span class="code-tag">&lt;/html&gt;</span></code></pre>
+                    </div>
+                </div>
+                
+                <div class="preview-container">
+                    <div class="weekone">
+                        <h1>Interactive Media</h1>
+                        <h2>Week 1</h2>
+                        <strong>Hello World</strong>
+                        <p>
+                            We learnt the basics of HTML like <em>inserting images, 
+                            italic font</em> and we familiarised ourselves with what 
+                            code looks like. 
+                        </p>
+                        <button onclick="alert('This button does nothing.')">Click!</button>
+                        <br>
+
+                        <img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy8AVzxQmvj4qlUJA9WZG_vXF5OQO8pbBP5w&usqp=CAU"
+                        />
+                    </div>
+
+                    <section style="
+                    display: flex;
+                    flex-direction: row;
+                    margin: 20px;
+                    gap: 30px;
+                    line-height: 24px;
+                    font-size: 16px;
+                    ">
+                        <div>
+                        <i>Evil Media</i> is an attempt to develop an understanding of
+                        contemporary media systems, techniques, and practices of mediation in an
+                        era of participation, of massive
+                        networks in which contests are waged as much between technical systems
+                        as between ideas
+                        or more ostensibly social forces, and in which such conflicts in turn
+                        <strong>ramify</strong>
+                        </div>
+                        <div>
+                        passions, projects, and plans. Much of what we will discuss are the
+                        <q>grey media</q> most recognisable from the world of work and
+                        administration, affecting the habits of government, business, and
+                        culture, yet rarely recognised or explored as media in their own right.
+                        </div>
+                    </section>
+                    <div style="font-size: 14px; margin-top: 10px;">
+                        Excerpt from <em>Evil Media</em>, by Matthew Fuller and Andrew Goffrey
+                    </div>
+                </div>
+            </div>
+
+            <!-- Learning Points Section -->
+            <div class="learning-points">
+                <h3>Key Learning Concepts</h3>
+                <p>During the Week 1 workshop, I gained fundamental knowledge of HTML structure and syntax. Here are the main concepts I learnt:</p>
+                
+                <div class="learning-list">
+                    <div class="learning-item">
+                        <h4>HTML Document Structure</h4>
+                        <p>I learnt that every HTML document follows a standard structure with DOCTYPE declaration, html, head, and body elements. The head contains meta information whilst the body contains the visible content.</p>
+                    </div>
+                    
+                    <div class="learning-item">
+                        <h4>Text Formatting Tags</h4>
+                        <p>I practised using various text formatting tags like <code>&lt;strong&gt;</code>, <code>&lt;em&gt;</code>, <code>&lt;i&gt;</code>, and <code>&lt;q&gt;</code> to style text content in different ways. This helps create visual hierarchy and emphasis in web content.</p>
+                    </div>
+                    
+                    <div class="learning-item">
+                        <h4>Basic Interactivity</h4>
+                        <p>I implemented a simple alert function with JavaScript and a button element to understand how HTML can interact with scripting languages to create interactive experiences.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Development Process -->
+            <div class="dev-process">
+                <h3>My Development Process</h3>
+                <p>This timeline shows my progression from starting with a blank file to creating a functional HTML page during the workshop activity:</p>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h4>Step 1: Basic Structure</h4>
+                            <p>I started by setting up the basic HTML structure with DOCTYPE, html, head, and body tags as demonstrated in class. This forms the skeleton of any web page.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h4>Step 2: Adding Content</h4>
+                            <p>Added headings, paragraphs, and applied text formatting with strong and em tags. I chose to include content about what we were learning in class to make it relevant.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h4>Step 3: Adding Images</h4>
+                            <p>Incorporated an image element with a URL source. I had to research the correct syntax for the img tag and understand that it's a self-closing tag.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h4>Step 4: Adding Interactivity</h4>
+                            <p>Created a button element and linked it to a JavaScript function to display an alert message. This was my first experience connecting HTML with JavaScript.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h4>Step 5: Layout Structure</h4>
+                            <p>Created a two-column layout using flexbox for the Evil Media excerpt. This helped me understand how to arrange content spatially on a webpage.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Challenges and Solutions -->
+            <div class="challenges">
+                <h3>Challenges & Solutions</h3>
+                <p>During the development process, I encountered several challenges. Here's how I resolved them:</p>
+                
+                <div class="challenge-item">
+                    <h4>Image Display Issues</h4>
+                    <p>The image wasn't displaying correctly at first. I could see a broken image icon in my browser.</p>
+                    <div class="challenge-solution">
+                        <h5>Solution:</h5>
+                        <p>I realised I had forgotten to close the img tag properly. I learnt that img tags are self-closing and should end with /&gt; instead of having a separate closing tag.</p>
+                    </div>
+                </div>
+                
+                <div class="challenge-item">
+                    <h4>Text Layout Challenges</h4>
+                    <p>When trying to create the two-column layout for the Evil Media excerpt, the text was appearing stacked vertically instead of side by side.</p>
+                    <div class="challenge-solution">
+                        <h5>Solution:</h5>
+                        <p>After researching, I discovered I needed to use CSS flexbox styling to create columns. I added inline CSS with display: flex and flex-direction: row to arrange the divs horizontally.</p>
+                    </div>
+                </div>
+                
+                <div class="challenge-item">
+                    <h4>Alert Button Not Working</h4>
+                    <p>Initially, clicking the button didn't trigger any alert.</p>
+                    <div class="challenge-solution">
+                        <h5>Solution:</h5>
+                        <p>I had placed the script tag in the wrong location and misspelt "function" in my JavaScript. After correcting these issues and making sure my function matched the onclick attribute, the alert worked properly.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- File Organization -->
+            <div class="file-structure">
+                <h3>Project Organisation</h3>
+                <p>For this course, I've created a structured folder system to keep my work organised and accessible:</p>
+                
+                <div class="folder-structure">
+                    interactive-media-workbook/
+                    <div class="folder">├── index.html (main navigation page)</div>
+                    <div class="folder">├── style.css (shared styles)</div>
+                    <div class="folder">├── weeks/</div>
+                    <div class="folder">│   ├── week1/</div>
+                    <div class="file">│   │   ├── basicPage.html (code workbook)</div>
+                    <div class="file">│   │   ├── workshop.html (workshop activities)</div>
+                    <div class="folder">│   ├── week2/</div>
+                    <div class="file">│   │   ├── (future files will go here)</div>
+                    <div class="folder">├── img/</div>
+                    <div class="folder">│   ├── workshop/</div>
+                    <div class="file">│   │   ├── (images for workshop activities)</div>
+                    <div class="folder">│   ├── code/</div>
+                    <div class="file">│   │   ├── (images for code examples)</div>
+                </div>
+                
+                <p style="margin-top: 20px;">This organisation follows the principle of separation of concerns, keeping code examples, workshop activities, and resources in dedicated folders. This makes it easier to find and update content as the course progresses.</p>
+            </div>
+
+            <!-- Personal Reflection -->
+            <div class="learning-points" style="margin-top: 60px; border-left-color: #F7BD63;">
+                <h3>Personal Reflection</h3>
+                <p>Week 1 marked my first formal introduction to web development. As someone with limited prior coding experience, I found the process both challenging and exciting.</p>
+                
+                <p>The most valuable insight for me was understanding that HTML is essentially a semantic language - it's about giving meaning to content through structure. The idea that we're not just styling text, but defining what each piece of content represents (headings, paragraphs, emphasis, etc.) helped me approach coding with a clearer mindset.</p>
+                
+                <p>I was particularly intrigued by how quickly we could create a functional webpage with just a few tags. The immediate visual feedback when previewing the HTML file made the learning process more engaging compared to other programming languages where results might not be as immediately visible.</p>
+                
+                <p>Moving forward, I want to explore how to create more complex layouts and incorporate design principles into my HTML work. I'm also curious about how HTML interacts with CSS for styling and JavaScript for functionality - elements we've only touched on briefly so far.</p>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 6 - Code Learning</title>
+    <link rel="stylesheet" href="../../style.css">
+    <style>
+        /* Code block styling to match the dark editor theme */
+        .code-block {
+            background-color: #1e1e1e;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 15px 0;
+            font-family: monospace;
+            color: #d4d4d4;
+            position: relative;
+            overflow: auto;
+            white-space: pre;
+        }
+        
+        .code-block::before {
+            content: "HTML SOURCE CODE";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #2d3748;
+            color: white;
+            padding: 8px 15px;
+            font-family: sans-serif;
+            font-size: 14px;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+        
+        .code-block.p5js::before {
+            content: "P5.JS CODE";
+        }
+        
+        .code-block.html::before {
+            content: "HTML SOURCE CODE";
+        }
+        
+        .code-content {
+            margin-top: 30px;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+        
+        /* Syntax highlighting */
+        .keyword {
+            color: #569cd6;
+        }
+        
+        .operator {
+            color: #d4d4d4;
+        }
+        
+        .string {
+            color: #ce9178;
+        }
+        
+        .number {
+            color: #b5cea8;
+        }
+        
+        .comment {
+            color: #6a9955;
+            font-style: italic;
+        }
+        
+        .function {
+            color: #dcdcaa;
+        }
+        
+        .html-tag {
+            color: #569cd6;
+        }
+        
+        .html-attr {
+            color: #9cdcfe;
+        }
+        
+        .html-string {
+            color: #ce9178;
+        }
+        
+        .html-comment {
+            color: #6a9955;
+        }
+        
+        /* Custom traffic light dots in the code header */
+        .traffic-lights {
+            position: absolute;
+            top: 8px;
+            right: 15px;
+            display: flex;
+            gap: 6px;
+        }
+        
+        .traffic-light {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .red {
+            background-color: #ff5f56;
+        }
+        
+        .yellow {
+            background-color: #ffbd2e;
+        }
+        
+        .green {
+            background-color: #27c93f;
+        }
+    </style>
+</head>
+<body>
+    <div class="name-tag">Winter Park | 1266782</div>
+    <a href="../../index.html" class="back-button">Back to Player</a>
+
+    <div class="container">
+        <div class="header-section">
+            <h1>Coding</h1>
+            <p class="subtitle">SOUND & INTERACTION IN P5.JS</p>
+        </div>
+        
+        <!-- Topics Overview Section -->
+        <section class="section topics-section">
+            <div class="section-header">
+                <h2>Topics Covered</h2>
+                <p class="section-subtitle">Week 6 Learning Focus</p>
+            </div>
+            
+            <div class="topics-grid">
+                <div class="topic-card">
+                    <div class="topic-title">Audio Input & Output</div>
+                    <div class="topic-description">
+                        <p>Learn how to incorporate audio into P5.js sketches, including loading sound files, playing and controlling audio, and capturing microphone input. The p5.sound library provides tools for audio analysis that can be used to create reactive visuals.</p>
+                    </div>
+                </div>
+                
+                <div class="topic-card">
+                    <div class="topic-title">Sound Analysis</div>
+                    <div class="topic-description">
+                        <p>Use the Amplitude analyser to measure audio levels in real-time and map these values to visual elements. Create dynamic animations that respond to music, allowing for interactive audiovisual experiences that change with the sound.</p>
+                    </div>
+                </div>
+                
+                <div class="topic-card">
+                    <div class="topic-title">Advanced Interactivity</div>
+                    <div class="topic-description">
+                        <p>Combine keyboard input, mouse events, and audio analysis to create complex interactive sketches. Learn techniques for text manipulation, rotation, and transformation that respond to user input and audio levels.</p>
+                    </div>
+                </div>
+                
+                <div class="topic-card">
+                    <div class="topic-title">UI Elements</div>
+                    <div class="topic-description">
+                        <p>Implement interactive buttons and UI controls that can be used to trigger sounds, change visual states, or control parameters of your sketch. Create dynamic interfaces that enhance user engagement with your creative projects.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- P5.js Audio Basics Section -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Audio Integration</h2>
+                <p class="section-subtitle">Adding Sound to P5.js Sketches</p>
+            </div>
+            
+            <div class="file-path-section">
+                <h3>Basic Sound Playback</h3>
+                <p>Load and play audio files with mouse clicks:</p>
+                <div class="code-block p5js">
+                    <div class="traffic-lights">
+                        <div class="traffic-light red"></div>
+                        <div class="traffic-light yellow"></div>
+                        <div class="traffic-light green"></div>
+                    </div>
+                    <div class="code-content"><span class="keyword">var</span> sound;
+
+<span class="function">function</span> <span class="function">preload</span>(){
+  sound = <span class="function">loadSound</span>(<span class="string">"data/intro-music.mp3"</span>);
+}
+
+<span class="function">function</span> <span class="function">setup</span>() {
+  <span class="function">createCanvas</span>(<span class="function">windowWidth</span>, <span class="function">windowHeight</span>);
+  <span class="function">background</span>(<span class="string">"pink"</span>);
+  <span class="function">getAudioContext</span>().<span class="function">suspend</span>()
+}
+
+<span class="function">function</span> <span class="function">draw</span>() {
+  <span class="comment">Your drawing code here</span>
+}
+
+<span class="function">function</span> <span class="function">mousePressed</span>() {
+  <span class="function">getAudioContext</span>().<span class="function">resume</span>();
+  sound.<span class="function">play</span>();
+}</div>
+                </div>
+                
+                <h3>Toggle Play/Pause</h3>
+                <p>Play or stop audio with each mouse click:</p>
+                <div class="code-block p5js">
+                    <div class="traffic-lights">
+                        <div class="traffic-light red"></div>
+                        <div class="traffic-light yellow"></div>
+                        <div class="traffic-light green"></div>
+                    </div>
+                    <div class="code-content"><span class="function">function</span> <span class="function">mousePressed</span>() {
+  <span class="function">getAudioContext</span>().<span class="function">resume</span>();
+  <span class="keyword">if</span>(sound.<span class="function">isPlaying</span>() == <span class="keyword">true</span>) {
+    sound.<span class="function">stop</span>();
+    sound.<span class="function">noLoop</span>();
+  }
+  <span class="keyword">else</span> {
+    sound.<span class="function">play</span>();
+    sound.<span class="function">loop</span>();
+  }
+}</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Sound Analysis Section -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Sound Visualisation</h2>
+                <p class="section-subtitle">Creating Audio-Reactive Graphics</p>
+            </div>
+            
+            <div class="file-path-section">
+                <h3>Amplitude Analysis</h3>
+                <p>Create visuals that respond to sound volume:</p>
+                <div class="code-block p5js">
+                    <div class="traffic-lights">
+                        <div class="traffic-light red"></div>
+                        <div class="traffic-light yellow"></div>
+                        <div class="traffic-light green"></div>
+                    </div>
+                    <div class="code-content"><span class="keyword">var</span> sound, analyser, volume;
+
+<span class="function">function</span> <span class="function">preload</span>(){
+  sound = <span class="function">loadSound</span>(<span class="string">"data/intro-music.mp3"</span>);
+}
+
+<span class="function">function</span> <span class="function">setup</span>() {
+  <span class="function">createCanvas</span>(<span class="function">windowWidth</span>, <span class="function">windowHeight</span>);
+  <span class="function">background</span>(<span class="string">"pink"</span>);
+  <span class="function">getAudioContext</span>().<span class="function">suspend</span>();
+  analyser = <span class="keyword">new</span> <span class="function">p5.Amplitude</span>();
+}
+
+<span class="function">function</span> <span class="function">draw</span>() {
+  volume = analyser.<span class="function">getLevel</span>();
+  <span class="function">circle</span>(<span class="function">mouseX</span>, <span class="function">mouseY</span>, volume * 100);
+}
+
+<span class="function">function</span> <span class="function">mousePressed</span>() {
+  <span class="function">getAudioContext</span>().<span class="function">resume</span>();
+  
+  <span class="comment">Set sound as input for the analyser</span>
+  analyser.<span class="function">setInput</span>(sound);
+  <span class="function">loop</span>();
+  
+  <span class="keyword">if</span>(sound.<span class="function">isPlaying</span>() == <span class="keyword">true</span>) {
+    sound.<span class="function">stop</span>();
+    sound.<span class="function">noLoop</span>();
+  }
+  <span class="keyword">else</span> {
+    sound.<span class="function">play</span>();
+    sound.<span class="function">loop</span>();
+  }
+}</div>
+                </div>
+                
+                <h3>Mapping Sound to Visual Elements</h3>
+                <p>Map audio levels to size, rotation, and other properties:</p>
+                <div class="code-block p5js">
+                    <div class="traffic-lights">
+                        <div class="traffic-light red"></div>
+                        <div class="traffic-light yellow"></div>
+                        <div class="traffic-light green"></div>
+                    </div>
+                    <div class="code-content"><span class="function">function</span> <span class="function">draw</span>() {
+  <span class="function">background</span>(<span class="string">"pink"</span>);
+  volume = analyser.<span class="function">getLevel</span>();
+  mappedVol = <span class="function">map</span>(volume, 0, 1.0, 0, width);
+  
+  <span class="function">circle</span>(<span class="function">mouseX</span>, <span class="function">mouseY</span>, mappedVol);
+  <span class="function">push</span>();
+    <span class="function">translate</span>(width/2, height/2);
+    <span class="function">rotate</span>(mappedVol);
+    <span class="function">textSize</span>(mappedVol);
+    <span class="function">text</span>(<span class="string">"DANCE"</span>, 0, 0);
+  <span class="function">pop</span>();
+}</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Interactive Elements Section -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Advanced Interaction</h2>
+                <p class="section-subtitle">Keyboard Input and UI Controls</p>
+            </div>
+            
+            <div class="file-path-section">
+                <h3>Keyboard Interaction</h3>
+                <p>Respond to keyboard input to modify your sketch:</p>
+                <div class="code-block p5js">
+                    <div class="traffic-lights">
+                        <div class="traffic-light red"></div>
+                        <div class="traffic-light yellow"></div>
+                        <div class="traffic-light green"></div>
+                    </div>
+                    <div class="code-content"><span class="keyword">var</span> sound, analyser, volume, string;
+
+<span class="function">function</span> <span class="function">setup</span>() {
+  <span class="function">createCanvas</span>(<span class="function">windowWidth</span>, <span class="function">windowHeight</span>);
+  <span class="function">textAlign</span>(<span class="keyword">CENTER</span>, <span class="keyword">CENTER</span>);
+  string = <span class="string">"DANCE"</span>;
+}
+
+<span class="function">function</span> <span class="function">draw</span>() {
+  <span class="function">background</span>(255, 255, 0, 12);
+  <span class="function">textSize</span>(32);
+  <span class="function">text</span>(string, width/2, height/2);
+}
+
+<span class="function">function</span> <span class="function">keyPressed</span>() {
+  <span class="keyword">if</span>(key == <span class="string">'b'</span>){
+    <span class="function">fill</span>(<span class="string">"blue"</span>);
+  }
+  string = string + key;  <span class="comment">Append pressed key to the string</span>
+}</div>
+                </div>
+                
+                <h3>Creating Button Controls</h3>
+                <p>Add interactive buttons to control your sketch:</p>
+                <div class="code-block p5js">
+                    <div class="traffic-lights">
+                        <div class="traffic-light red"></div>
+                        <div class="traffic-light yellow"></div>
+                        <div class="traffic-light green"></div>
+                    </div>
+                    <div class="code-content"><span class="keyword">var</span> myButton;
+
+<span class="function">function</span> <span class="function">setup</span>() {
+  <span class="function">createCanvas</span>(<span class="function">windowWidth</span>, <span class="function">windowHeight</span>);
+  
+  <span class="comment">Create a button with text</span>
+  myButton = <span class="function">createButton</span>(<span class="string">"DANCE NOW!"</span>);
+  
+  <span class="comment">Position the button randomly on the screen</span>
+  myButton.<span class="function">position</span>(<span class="function">random</span>(width), <span class="function">random</span>(height));
+  
+  <span class="comment">Add a click event handler</span>
+  myButton.<span class="function">mousePressed</span>(buttonClicked);
+}
+
+<span class="function">function</span> <span class="function">buttonClicked</span>() {
+  <span class="function">background</span>(<span class="function">random</span>(255), <span class="function">random</span>(255), <span class="function">random</span>(255));
+  
+  <span class="comment">Move button to a new random position</span>
+  myButton.<span class="function">position</span>(<span class="function">random</span>(width), <span class="function">random</span>(height));
+}</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Complete Example Section -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Complete Example</h2>
+                <p class="section-subtitle">Audio-Reactive Text Animation</p>
+            </div>
+            
+            <div class="file-path-section">
+                <p>This example combines sound analysis, rotation, and keyboard interaction:</p>
+                <div class="code-block p5js">
+                    <div class="traffic-lights">
+                        <div class="traffic-light red"></div>
+                        <div class="traffic-light yellow"></div>
+                        <div class="traffic-light green"></div>
+                    </div>
+                    <div class="code-content"><span class="keyword">var</span> sound, analyser, volume, string;
+
+<span class="function">function</span> <span class="function">preload</span>(){
+  sound = <span class="function">loadSound</span>(<span class="string">"data/intro-music.mp3"</span>);
+}
+
+<span class="function">function</span> <span class="function">setup</span>() {
+  <span class="function">createCanvas</span>(<span class="function">windowWidth</span>, <span class="function">windowHeight</span>);
+  <span class="function">background</span>(<span class="string">"pink"</span>);
+  <span class="function">getAudioContext</span>().<span class="function">suspend</span>();
+  analyser = <span class="keyword">new</span> <span class="function">p5.Amplitude</span>();
+  <span class="function">textAlign</span>(<span class="keyword">CENTER</span>, <span class="keyword">CENTER</span>);
+  string = <span class="string">"DANCE"</span>;
+}
+
+<span class="function">function</span> <span class="function">draw</span>() {
+  <span class="function">background</span>(255, 255, 0, 12);  <span class="comment">Semi-transparent background creates trails</span>
+  volume = analyser.<span class="function">getLevel</span>();
+  mappedVol = <span class="function">map</span>(volume, 0, 1.0, 0, width);
+  
+  <span class="function">circle</span>(<span class="function">mouseX</span>, <span class="function">mouseY</span>, mappedVol);
+  <span class="function">push</span>();
+    <span class="function">translate</span>(width/2, height/2);
+    <span class="function">rotate</span>(mappedVol);
+    <span class="function">textSize</span>(mappedVol);
+    <span class="function">text</span>(string, 0, 0);
+  <span class="function">pop</span>();
+}
+
+<span class="function">function</span> <span class="function">mousePressed</span>() {
+  <span class="function">getAudioContext</span>().<span class="function">resume</span>();
+  
+  analyser.<span class="function">setInput</span>(sound);
+  <span class="function">loop</span>();
+  
+  <span class="keyword">if</span>(sound.<span class="function">isPlaying</span>() == <span class="keyword">true</span>) {
+    sound.<span class="function">stop</span>();
+    sound.<span class="function">noLoop</span>();
+  }
+  <span class="keyword">else</span> {
+    sound.<span class="function">play</span>();
+    sound.<span class="function">loop</span>();
+  }
+}
+
+<span class="function">function</span> <span class="function">keyPressed</span>() {
+  <span class="keyword">if</span>(key == <span class="string">'b'</span>){
+    <span class="function">fill</span>(<span class="string">"blue"</span>);
+  }
+  string = string + key;  <span class="comment">Add pressed key to the displayed text</span>
+}</div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

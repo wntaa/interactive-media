@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 4 - Code Learning</title>
+    <link rel="stylesheet" href="../../style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.js"></script>
+    <style>
+        .p5-container {
+            width: 100%;
+            height: 300px;
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        #p5-sketch {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="name-tag">Winter Park | 1266782</div>
+    <a href="../../index.html" class="back-button">Back to Player</a>
+
+    <div class="container">
+        <div class="header-section">
+            <h1>Coding</h1>
+            <p class="subtitle">P5.JS ANIMATION AND INTERACTIVITY</p>
+        </div>
+        
+        <!-- Topics Overview Section -->
+        <section class="section topics-section">
+            <div class="section-header">
+                <h2>Topics Covered</h2>
+                <p class="section-subtitle">Week 4 Learning Focus</p>
+            </div>
+            
+            <div class="topics-grid">
+                <div class="topic-card">
+                    <div class="topic-title">Animation Basics</div>
+                    <div class="topic-description">
+                        <p>Animation in P5.js uses the draw() function to create motion by updating variables and redrawing elements frame by frame. Understanding the relationship between frameRate() and animation speed is essential for creating smooth, controlled animations across different devices.</p>
+                    </div>
+                </div>
+                
+                <div class="topic-card">
+                    <div class="topic-title">Interactivity</div>
+                    <div class="topic-description">
+                        <p>P5.js provides multiple ways to create user interaction through mouse events (mousePressed, mouseMoved), keyboard events (keyPressed), and touch events for mobile devices. These event handlers allow sketches to respond dynamically to user input, creating engaging interactive experiences.</p>
+                    </div>
+                </div>
+                
+                <div class="topic-card">
+                    <div class="topic-title">Variables & Arrays</div>
+                    <div class="topic-description">
+                        <p>Variables store and manipulate data throughout a sketch, allowing elements to change over time. Arrays provide a way to store collections of related data that can be used for complex animations, particle systems, and data visualization projects.</p>
+                    </div>
+                </div>
+                
+                <div class="topic-card">
+                    <div class="topic-title">Image Manipulation</div>
+                    <div class="topic-description">
+                        <p>P5.js allows for creative image manipulation through functions like filter(), blend(), and tint(). Images can be loaded, transformed, and modified dynamically during runtime, enabling techniques like image processing, collage, and visual effects.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- P5.js Demo Section -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Interactive P5.js Demo</h2>
+                <p class="section-subtitle">Move your mouse to interact</p>
+            </div>
+            
+            <div class="p5-container">
+                <div id="p5-sketch"></div>
+            </div>
+        </section>
+        
+        <!-- Code Examples Section -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Code Examples</h2>
+                <p class="section-subtitle">Key Concepts from Workshop</p>
+            </div>
+            
+            <div class="code-example">
+                <h3>Basic Animation Loop</h3>
+                <pre><code>
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+  background(0);
+}
+
+function draw() {
+  // Fade the background for trail effect
+  background(0, 10);
+  
+  // Draw a circle that follows the mouse
+  fill(255, 100, 100);
+  noStroke();
+  circle(mouseX, mouseY, 50);
+}
+                </code></pre>
+            </div>
+            
+            <div class="code-example">
+                <h3>Using Arrays for Multiple Objects</h3>
+                <pre><code>
+let particles = [];
+
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+  // Create 50 particles
+  for (let i = 0; i < 50; i++) {
+    particles.push({
+      x: random(width),
+      y: random(height),
+      size: random(5, 20),
+      speedX: random(-2, 2),
+      speedY: random(-2, 2),
+      color: color(random(255), random(255), random(255))
+    });
+  }
+}
+
+function draw() {
+  background(0, 20);
+  
+  // Update and display each particle
+  for (let i = 0; i < particles.length; i++) {
+    let p = particles[i];
+    
+    // Update position
+    p.x += p.speedX;
+    p.y += p.speedY;
+    
+    // Bounce off edges
+    if (p.x < 0 || p.x > width) p.speedX *= -1;
+    if (p.y < 0 || p.y > height) p.speedY *= -1;
+    
+    // Display particle
+    fill(p.color);
+    noStroke();
+    circle(p.x, p.y, p.size);
+  }
+}
+                </code></pre>
+            </div>
+        </section>
+    </div>
+    
+    <script>
+        // P5.js sketch code
+        let sketch = function(p) {
+            let particles = [];
+            let colors = ["#FF5252", "#FF4081", "#E040FB", "#7C4DFF", "#536DFE", "#448AFF", "#40C4FF", "#18FFFF"];
+            
+            p.setup = function() {
+                let canvas = p.createCanvas(p.windowWidth, 300);
+                canvas.parent('p5-sketch');
+                
+                // Create initial particles
+                for (let i = 0; i < 30; i++) {
+                    particles.push({
+                        x: p.random(p.width),
+                        y: p.random(p.height),
+                        size: p.random(5, 20),
+                        speedX: p.random(-1, 1),
+                        speedY: p.random(-1, 1),
+                        color: p.random(colors)
+                    });
+                }
+            };
+            
+            p.draw = function() {
+                p.background(0, 20);
+                
+                // Draw connection lines
+                p.stroke(255, 50);
+                p.strokeWeight(0.5);
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        let d = p.dist(particles[i].x, particles[i].y, particles[j].x, particles[j].y);
+                        if (d < 100) {
+                            p.line(particles[i].x, particles[i].y, particles[j].x, particles[j].y);
+                        }
+                    }
+                }
+                
+                // Update and display particles
+                for (let i = 0; i < particles.length; i++) {
+                    let part = particles[i];
+                    
+                    // Add some jitter
+                    part.x += part.speedX + p.random(-0.5, 0.5);
+                    part.y += part.speedY + p.random(-0.5, 0.5);
+                    
+                    // Wrap around edges
+                    if (part.x < 0) part.x = p.width;
+                    if (part.x > p.width) part.x = 0;
+                    if (part.y < 0) part.y = p.height;
+                    if (part.y > p.height) part.y = 0;
+                    
+                    // Attract to mouse
+                    let mouseDistance = p.dist(part.x, part.y, p.mouseX, p.mouseY);
+                    if (mouseDistance < 100) {
+                        let angle = p.atan2(p.mouseY - part.y, p.mouseX - part.x);
+                        part.x += p.cos(angle) * 0.5;
+                        part.y += p.sin(angle) * 0.5;
+                    }
+                    
+                    // Display particle
+                    p.noStroke();
+                    p.fill(part.color);
+                    p.circle(part.x, part.y, part.size);
+                }
+            };
+            
+            p.windowResized = function() {
+                p.resizeCanvas(p.windowWidth, 300);
+            };
+            
+            p.mousePressed = function() {
+                // Add new particle on mouse press
+                if (p.mouseY < 300) {
+                    particles.push({
+                        x: p.mouseX,
+                        y: p.mouseY,
+                        size: p.random(10, 30),
+                        speedX: p.random(-2, 2),
+                        speedY: p.random(-2, 2),
+                        color: p.random(colors)
+                    });
+                }
+            };
+        };
+        
+        new p5(sketch);
+    </script>
+</body>
+</html>

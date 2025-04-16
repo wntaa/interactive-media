@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 2 - Code Learning</title>
+    <link rel="stylesheet" href="../../style.css">
+    <style>
+        
+        /* Code section specific styles */
+        .code-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+        
+        .code-display {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .code-header {
+            background: rgba(35, 73, 117, 0.8);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .code-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .code-dots {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .code-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .code-dot.red {
+            background-color: #FF5F56;
+        }
+        
+        .code-dot.yellow {
+            background-color: #FFBD2E;
+        }
+        
+        .code-dot.green {
+            background-color: #27C93F;
+        }
+        
+        .code-content {
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        
+        .code-content pre {
+            margin: 0;
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #E0E0E0;
+            white-space: pre-wrap;
+        }
+        
+        .code-content code {
+            color: #E0E0E0;
+        }
+        
+        .code-keyword {
+            color: #F7BD63;
+        }
+        
+        .code-tag {
+            color: #3E8A96;
+        }
+        
+        .code-attribute {
+            color: #F7BD63;
+        }
+        
+        .code-string {
+            color: #A5D6A7;
+        }
+        
+        .code-comment {
+            color: #787878;
+        }
+        
+        .code-property {
+            color: #ff9966;
+        }
+        
+        .code-value {
+            color: #78c8fa;
+        }
+        
+        /* Result Preview */
+        .preview-container {
+            background: white;
+            color: black;
+            border-radius: 8px;
+            padding: 20px;
+            height: 600px;
+            overflow-y: auto;
+        }
+        
+        /* Specific styling for the Week 2 demo content */
+        .preview-wrapper {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-size: 14px;
+            text-align: left;
+        }
+        
+        .preview-header {
+            background-color: rgb(137, 110, 110);
+            color: white;
+            padding: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .preview-header h1 {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            color: white;
+            font-size: 24px;
+            text-align: left;
+            margin: 0;
+        }
+        
+        .preview-header h1::after {
+            display: none;
+        }
+        
+        .preview-wrapper h2 {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-size: 20px;
+            color: black;
+            margin-bottom: 15px;
+        }
+        
+        .preview-wrapper img {
+            width: 15rem;
+        }
+        
+        .preview-flex-wrapper {
+            padding: 2.5rem;
+            width: calc(100% - 5rem);
+            display: flex;
+            flex-direction: row;
+            background-color: blue;
+        }
+        
+        .preview-menu-col {
+            margin: 25px;
+            padding: 15px;
+            width: 50%;
+            background-color: greenyellow;
+        }
+        
+        .preview-content {
+            margin: 25px;
+            width: 50%;
+            background-color: blueviolet;
+            color: white;
+            padding: 15px;
+        }
+        
+        /* Learning points */
+        .learning-points {
+            margin-top: 60px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            padding: 30px;
+            border-left: 5px solid #3E8A96;
+        }
+        
+        .learning-points h3 {
+            margin-top: 0;
+            color: white;
+        }
+        
+        .learning-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .learning-item {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 8px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        
+        .learning-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .learning-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #3E8A96, #F7BD63);
+            border-radius: 8px 8px 0 0;
+        }
+        
+        .learning-item h4 {
+            margin-top: 10px;
+            margin-bottom: 15px;
+            color: #F7BD63;
+            font-size: 18px;
+        }
+        
+        .learning-item p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 900px) {
+            .code-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .learning-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            h1 {
+                font-size: 80px;
+            }
+            
+            .preview-flex-wrapper {
+                flex-direction: column;
+            }
+            
+            .preview-menu-col, .preview-content {
+                width: calc(100% - 50px);
+                margin: 10px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .learning-list {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="name-tag">Winter Park | 1266782</div>
+    <a href="../../index.html" class="back-button">Back to Player</a>
+
+    <div class="container">
+        <div class="header-section">
+            <h1>Coding</h1>
+            <p class="subtitle">EXPLORING CSS LAYOUTS AND STYLING WITH FLEXBOX, LEARNING HOW TO CREATE STRUCTURED WEB LAYOUTS WITH PROPER STYLING AND ORGANIZATION.</p>
+        </div>
+        
+        <section class="section">
+            <div class="section-header">
+                <h2>CSS & Layout</h2>
+                <p class="section-subtitle">Building Multi-Column Layouts</p>
+            </div>
+            
+            <div class="code-container">
+                <div class="code-display">
+                    <div class="code-header">
+                        <div class="code-title">HTML & CSS Source Code</div>
+                        <div class="code-dots">
+                            <div class="code-dot red"></div>
+                            <div class="code-dot yellow"></div>
+                            <div class="code-dot green"></div>
+                        </div>
+                    </div>
+                    <div class="code-content">
+                        <pre><code><span class="code-tag">&lt;!DOCTYPE html&gt;</span>
+<span class="code-tag">&lt;html</span> <span class="code-attribute">lang</span>=<span class="code-string">"en"</span><span class="code-tag">&gt;</span>
+<span class="code-tag">&lt;head&gt;</span>
+    <span class="code-tag">&lt;meta</span> <span class="code-attribute">charset</span>=<span class="code-string">"UTF-8"</span><span class="code-tag">&gt;</span>
+    <span class="code-tag">&lt;meta</span> <span class="code-attribute">name</span>=<span class="code-string">"viewport"</span> <span class="code-attribute">content</span>=<span class="code-string">"width=device-width, initial-scale=1.0"</span><span class="code-tag">&gt;</span>
+    <span class="code-tag">&lt;title&gt;</span>Workbook1<span class="code-tag">&lt;/title&gt;</span>
+    <span class="code-tag">&lt;style&gt;</span>
+        <span class="code-property">*</span> {
+            <span class="code-property">margin</span>: <span class="code-value">0</span>;
+            <span class="code-property">padding</span>: <span class="code-value">0</span>;
+        }
+        <span class="code-property">body</span> {
+            <span class="code-property">width</span>: <span class="code-value">100vw</span>;
+            <span class="code-property">height</span>: <span class="code-value">100vh</span>;
+            <span class="code-property">overflow</span>: <span class="code-value">hidden</span>;
+            <span class="code-property">font-size</span>: <span class="code-value">14px</span>;
+            <span class="code-property">text-align</span>: <span class="code-value">left</span>;
+        }
+
+        <span class="code-property">h1</span> {
+            <span class="code-property">font-family</span>: <span class="code-value">Georgia, 'Times New Roman', Times, serif</span>;
+        }
+        <span class="code-property">h2</span> {
+            <span class="code-property">font-family</span>: <span class="code-value">Georgia, 'Times New Roman', Times, serif</span>;
+        }
+
+        <span class="code-property">img</span> {
+            <span class="code-property">width</span>: <span class="code-value">15rem</span>;
+        }
+
+        <span class="code-property">header</span> {
+            <span class="code-property">background-color</span>: <span class="code-value">rgb(137, 110, 110)</span>;
+            <span class="code-property">color</span>: <span class="code-value">white</span>;
+            <span class="code-property">height</span>: <span class="code-value">10%</span>;
+            <span class="code-property">font-size</span>: <span class="code-value">1.5rem</span>;
+        }
+        
+        <span class="code-property">.wrapper</span> {
+            <span class="code-property">padding</span>: <span class="code-value">2.5rem</span>;
+            <span class="code-property">width</span>: <span class="code-value">100%</span>;
+            <span class="code-property">display</span>: <span class="code-value">flex</span>;
+            <span class="code-property">flex-direction</span>: <span class="code-value">row</span>;
+            <span class="code-property">background-color</span>: <span class="code-value">blue</span>;
+        }
+
+        <span class="code-property">#menu-col</span> {
+            <span class="code-property">margin</span>: <span class="code-value">25px</span>;
+            <span class="code-property">padding</span>: <span class="code-value">15px</span>;
+            <span class="code-property">width</span>: <span class="code-value">50%</span>;
+            <span class="code-property">background-color</span>: <span class="code-value">greenyellow</span>;
+        }
+
+        <span class="code-property">#content</span> {
+            <span class="code-property">margin</span>: <span class="code-value">25px</span>;
+            <span class="code-property">width</span>: <span class="code-value">50%</span>;
+            <span class="code-property">background-color</span>: <span class="code-value">blueviolet</span>;
+        }
+    <span class="code-tag">&lt;/style&gt;</span>
+<span class="code-tag">&lt;/head&gt;</span>
+<span class="code-tag">&lt;body&gt;</span>
+    <span class="code-tag">&lt;header&gt;</span><span class="code-tag">&lt;h1&gt;</span>Winter's Workbook<span class="code-tag">&lt;/h1&gt;</span><span class="code-tag">&lt;/header&gt;</span>
+    <span class="code-tag">&lt;div</span> <span class="code-attribute">class</span>=<span class="code-string">"wrapper"</span><span class="code-tag">&gt;</span>
+        <span class="code-tag">&lt;div</span> <span class="code-attribute">id</span>=<span class="code-string">"menu-col"</span><span class="code-tag">&gt;</span>
+            <span class="code-tag">&lt;a</span> <span class="code-attribute">href</span>=<span class="code-string">"../Week1/index.html"</span><span class="code-tag">&gt;</span><span class="code-tag">&lt;button&gt;</span>Week 1<span class="code-tag">&lt;/button&gt;</span><span class="code-tag">&lt;/a&gt;</span>
+        <span class="code-tag">&lt;/div&gt;</span>
+        <span class="code-tag">&lt;div</span> <span class="code-attribute">id</span>=<span class="code-string">"content"</span><span class="code-tag">&gt;</span>
+            <span class="code-tag">&lt;h2&gt;</span>Week 1 content<span class="code-tag">&lt;/h2&gt;</span>
+            <span class="code-tag">&lt;p&gt;</span>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,<span class="code-tag">&lt;img</span> <span class="code-attribute">src</span>=<span class="code-string">"../img/atomic.jpeg"</span><span class="code-tag">&gt;</span> quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            <span class="code-tag">&lt;/p&gt;</span>
+        <span class="code-tag">&lt;/div&gt;</span>
+    <span class="code-tag">&lt;/div&gt;</span>
+<span class="code-tag">&lt;/body&gt;</span>
+<span class="code-tag">&lt;/html&gt;</span></code></pre>
+                    </div>
+                </div>
+                
+                <div class="preview-container">
+                    <div class="preview-wrapper">
+                        <div class="preview-header">
+                            <h1>Winter's Workbook</h1>
+                        </div>
+                        <div class="preview-flex-wrapper">
+                            <div class="preview-menu-col">
+                                <a href="#"><button>Week 1</button></a>
+                            </div>
+                            <div class="preview-content">
+                                <h2>Week 1 content</h2>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                    <img src="https://via.placeholder.com/240x160" alt="Placeholder image"> 
+                                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="learning-points">
+                <h3>Key Learnings</h3>
+                <div class="learning-list">
+                    <div class="learning-item">
+                        <h4>CSS Layout</h4>
+                        <p>Understanding how to create multi-column layouts using CSS Flexbox, which allows for responsive design and flexible content arrangement.</p>
+                    </div>
+                    <div class="learning-item">
+                        <h4>CSS Selectors</h4>
+                        <p>Working with different CSS selector types including element selectors, class selectors (with dot notation), and ID selectors (with hash notation).</p>
+                    </div>
+                    <div class="learning-item">
+                        <h4>Box Model</h4>
+                        <p>Implementing margin, padding, and width properties to control spacing and dimensions of elements, creating visual separation between content areas.</p>
+                    </div>
+                    <div class="learning-item">
+                        <h4>CSS Units</h4>
+                        <p>Using various CSS units like rem for typography, percentage for responsive dimensions, and viewport units (vw/vh) for full-screen layouts.</p>
+                    </div>
+                    <div class="learning-item">
+                        <h4>Custom Styling</h4>
+                        <p>Applying background colors, font family specifications, and text alignment to create visually distinct sections with proper typography.</p>
+                    </div>
+                    <div class="learning-item">
+                        <h4>HTML Structure</h4>
+                        <p>Building semantic HTML structure with header elements and proper content organization using divs with appropriate classes and IDs.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

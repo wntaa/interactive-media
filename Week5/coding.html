@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 5 - Code Learning</title>
+    <link rel="stylesheet" href="../../style.css">
+    <style>
+        /* Code block styling to match the dark editor theme */
+        .code-block {
+            background-color: #1e1e1e;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 15px 0;
+            font-family: monospace;
+            color: #d4d4d4;
+            position: relative;
+            overflow: auto;
+            white-space: pre;
+        }
+        
+        .code-block::before {
+            content: "HTML SOURCE CODE";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #2d3748;
+            color: white;
+            padding: 8px 15px;
+            font-family: sans-serif;
+            font-size: 14px;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+        
+        .code-block.p5js::before {
+            content: "P5.JS CODE";
+        }
+        
+        .code-block.html::before {
+            content: "HTML SOURCE CODE";
+        }
+        
+        .code-content {
+            margin-top: 30px;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+        
+        /* Syntax highlighting */
+        .keyword {
+            color: #569cd6;
+        }
+        
+        .operator {
+            color: #d4d4d4;
+        }
+        
+        .string {
+            color: #ce9178;
+        }
+        
+        .number {
+            color: #b5cea8;
+        }
+        
+        .comment {
+            color: #6a9955;
+            font-style: italic;
+        }
+        
+        .function {
+            color: #dcdcaa;
+        }
+        
+        .html-tag {
+            color: #569cd6;
+        }
+        
+        .html-attr {
+            color: #9cdcfe;
+        }
+        
+        .html-string {
+            color: #ce9178;
+        }
+        
+        .html-comment {
+            color: #6a9955;
+        }
+        
+        /* Custom traffic light dots in the code header */
+        .traffic-lights {
+            position: absolute;
+            top: 8px;
+            right: 15px;
+            display: flex;
+            gap: 6px;
+        }
+        
+        .traffic-light {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .red {
+            background-color: #ff5f56;
+        }
+        
+        .yellow {
+            background-color: #ffbd2e;
+        }
+        
+        .green {
+            background-color: #27c93f;
+        }
+    </style>
+</head>
+<body>
+    <div class="name-tag">Winter Park | 1266782</div>
+    <a href="../../index.html" class="back-button">Back to Player</a>
+
+    <div class="container">
+        <div class="header-section">
+            <h1>Coding</h1>
+            <p class="subtitle">IMAGE & SOUND IN P5.JS</p>
+        </div>
+        
+        <!-- Topics Overview Section -->
+        <section class="section topics-section">
+            <div class="section-header">
+                <h2>Topics Covered</h2>
+                <p class="section-subtitle">Week 5 Learning Focus</p>
+            </div>
+            
+            <div class="topics-grid">
+                <div class="topic-card">
+                    <div class="topic-title">Image & Video Processing</div>
+                    <div class="topic-description">
+                        <p>P5.js offers robust tools for loading, displaying, and manipulating images and video. Learn how to apply filters, access pixel data, and create dynamic visual effects by processing visual media in real-time.</p>
+                    </div>
+                </div>
+                
+                <div class="topic-card">
+                    <div class="topic-title">Sound Integration</div>
+                    <div class="topic-description">
+                        <p>With the p5.sound library, you can load, play, and analyse audio in your sketches. Create interactive sound experiences by connecting visual elements to audio properties like amplitude and frequency, enabling audio-responsive animations.</p>
+                    </div>
+                </div>
+                
+                <div class="topic-card">
+                    <div class="topic-title">Webcam & Camera</div>
+                    <div class="topic-description">
+                        <p>Capture live video from the user's webcam and incorporate it into your sketches. This opens possibilities for interactive installations, augmented reality experiences, and computer vision applications when combined with libraries like ml5.js.</p>
+                    </div>
+                </div>
+                
+                <div class="topic-card">
+                    <div class="topic-title">Advanced Interactions</div>
+                    <div class="topic-description">
+                        <p>Move beyond basic mouse interactions with keyboard events, gesture recognition, and state management techniques. Create more complex user experiences by combining multiple interaction methods and controlling the flow of your application.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- P5.js Walk Thrus Section -->
+        <section class="section">
+            <div class="section-header">
+                <h2>P5.js Walk Thrus</h2>
+                <p class="section-subtitle">Step-by-Step Guides</p>
+            </div>
+            
+            <div class="file-path-section">
+                <h3>Adding Images</h3>
+                <div class="path-example">
+                    <p><strong>1.</strong> Drag and drop your image onto the editing pane p5 Processing sketch. This will make a copy of the image in a folder titled 'data', which lives in the same folder as your sketch file {CMD K}.</p>
+                </div>
+                
+                <div class="path-example">
+                    <p><strong>2.</strong> Declare your image variable, and point to the image file in your sketch, i.e.</p>
+                    <div class="code-block p5js">
+                        <div class="traffic-lights">
+                            <div class="traffic-light red"></div>
+                            <div class="traffic-light yellow"></div>
+                            <div class="traffic-light green"></div>
+                        </div>
+                        <div class="code-content"><span class="keyword">var</span> img1;
+
+<span class="function">function</span> <span class="function">preload</span>() {
+  img1 = <span class="function">loadImage</span>(<span class="string">"data/yourimage.jpg"</span>);
+}</div>
+                    </div>
+                </div>
+                
+                <div class="path-example">
+                    <p><strong>3.</strong> You can then use your image across any function, eg you can display your image in your sketch by adding:</p>
+                    <div class="code-block p5js">
+                        <div class="traffic-lights">
+                            <div class="traffic-light red"></div>
+                            <div class="traffic-light yellow"></div>
+                            <div class="traffic-light green"></div>
+                        </div>
+                        <div class="code-content"><span class="function">image</span>(img1, 0, 0);</div>
+                    </div>
+                    <p>inside your draw() {} function</p>
+                </div>
+            </div>
+            
+            <div class="file-path-section">
+                <h3>Edit HTML content around/on top of your P5 sketch</h3>
+                <div class="path-example">
+                    <p><strong>NOTE THIS IS IN YOUR index.html TAB</strong></p>
+                    <div class="code-block html">
+                        <div class="traffic-lights">
+                            <div class="traffic-light red"></div>
+                            <div class="traffic-light yellow"></div>
+                            <div class="traffic-light green"></div>
+                        </div>
+                        <div class="code-content"><span class="html-tag">&lt;!DOCTYPE</span> <span class="html-attr">html</span><span class="html-tag">&gt;</span>
+<span class="html-tag">&lt;html&gt;</span>
+<span class="html-tag">&lt;head&gt;</span>
+<span class="html-tag">&lt;meta</span> <span class="html-attr">charset=</span><span class="html-string">"utf-8"</span><span class="html-tag">&gt;</span>
+<span class="html-tag">&lt;meta</span> <span class="html-attr">name=</span><span class="html-string">"viewport"</span> <span class="html-attr">content=</span><span class="html-string">"width=device-width, initial-scale=1.0"</span><span class="html-tag">&gt;</span>
+<span class="html-tag">&lt;script</span> <span class="html-attr">language=</span><span class="html-string">"javascript"</span> <span class="html-attr">type=</span><span class="html-string">"text/javascript"</span> <span class="html-attr">src=</span><span class="html-string">"libraries/p5.min.js"</span><span class="html-tag">&gt;&lt;/script&gt;</span>
+<span class="html-tag">&lt;script</span> <span class="html-attr">language=</span><span class="html-string">"javascript"</span> <span class="html-attr">type=</span><span class="html-string">"text/javascript"</span> <span class="html-attr">src=</span><span class="html-string">"thurs_am_img.js"</span><span class="html-tag">&gt;&lt;/script&gt;</span>
+<span class="html-comment">&lt;!-- OK, YOU CAN MAKE CHANGES BELOW THIS LINE AGAIN --&gt;</span>
+<span class="html-tag">&lt;style&gt;</span>
+body {
+  padding: 0;
+  margin: 0;
+}
+button{
+  position:absolute;
+  left:20vw;
+  top:20vh;
+}
+<span class="html-tag">&lt;/style&gt;</span>
+<span class="html-tag">&lt;/head&gt;</span>
+<span class="html-tag">&lt;body&gt;</span>
+<span class="html-tag">&lt;button&gt;</span>HELLO WORLD<span class="html-tag">&lt;/button&gt;</span>
+<span class="html-tag">&lt;/body&gt;</span>
+<span class="html-tag">&lt;/html&gt;</span></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="file-path-section">
+                <h3>Add Webcam</h3>
+                <div class="path-example">
+                    <p>At the beginning declare your capture variable:</p>
+                    <div class="code-block p5js">
+                        <div class="traffic-lights">
+                            <div class="traffic-light red"></div>
+                            <div class="traffic-light yellow"></div>
+                            <div class="traffic-light green"></div>
+                        </div>
+                        <div class="code-content"><span class="keyword">var</span> capture;</div>
+                    </div>
+                </div>
+                
+                <div class="path-example">
+                    <p>And in your setup():</p>
+                    <div class="code-block p5js">
+                        <div class="traffic-lights">
+                            <div class="traffic-light red"></div>
+                            <div class="traffic-light yellow"></div>
+                            <div class="traffic-light green"></div>
+                        </div>
+                        <div class="code-content">capture = <span class="function">createCapture</span>(<span class="keyword">VIDEO</span>);
+capture.<span class="function">size</span>(640, 480);</div>
+                    </div>
+                </div>
+                
+                <div class="path-example">
+                    <p>Then place in your draw(), with or without the filter() function:</p>
+                    <div class="code-block p5js">
+                        <div class="traffic-lights">
+                            <div class="traffic-light red"></div>
+                            <div class="traffic-light yellow"></div>
+                            <div class="traffic-light green"></div>
+                        </div>
+                        <div class="code-content"><span class="function">image</span>(capture, width / 2 - 320, height / 2 - 240);
+<span class="function">filter</span>(<span class="keyword">THRESHOLD</span>);</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Code Examples Section -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Code Examples</h2>
+                <p class="section-subtitle">Ready-to-Use P5.js Snippets</p>
+            </div>
+            
+            <div class="file-path-section">
+                <h3>Dot To Dot</h3>
+                <div class="path-example">
+                    <p>Press any key on the keyboard to place a number, click and drag your mouse to draw.</p>
+                    <div class="code-block p5js">
+                        <div class="traffic-lights">
+                            <div class="traffic-light red"></div>
+                            <div class="traffic-light yellow"></div>
+                            <div class="traffic-light green"></div>
+                        </div>
+                        <div class="code-content"><span class="keyword">var</span> counter;
+
+<span class="function">function</span> <span class="function">setup</span>() {
+  <span class="function">createCanvas</span>(<span class="function">windowWidth</span>, <span class="function">windowHeight</span>);
+  <span class="function">background</span>(255,255,255);
+  counter=0;
+  <span class="function">textSize</span>(20);
+}
+
+<span class="function">function</span> <span class="function">draw</span>() {
+  <span class="keyword">if</span> (<span class="function">mouseIsPressed</span>) {
+    <span class="function">strokeWeight</span>(10)
+    <span class="function">stroke</span>(255,0,0);
+    <span class="function">line</span>(<span class="function">mouseX</span>, <span class="function">mouseY</span>, <span class="function">pmouseX</span>, <span class="function">pmouseY</span>);
+  }
+}
+
+<span class="function">function</span> <span class="function">keyPressed</span>(){
+  counter++;
+  <span class="function">fill</span>(0);
+  <span class="function">circle</span>(<span class="function">mouseX</span>, <span class="function">mouseY</span>, 5);
+  <span class="function">text</span>(counter, <span class="function">mouseX</span>,<span class="function">mouseY</span>);
+}</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="file-path-section">
+                <h3>POINTILLISM</h3>
+                <div class="path-example">
+                    <div class="code-block p5js">
+                        <div class="traffic-lights">
+                            <div class="traffic-light red"></div>
+                            <div class="traffic-light yellow"></div>
+                            <div class="traffic-light green"></div>
+                        </div>
+                        <div class="code-content"><span class="keyword">let</span> img; 
+<span class="keyword">let</span> pixelSize = 10;
+
+<span class="function">function</span> <span class="function">preload</span>() {   
+  img = <span class="function">loadImage</span>(<span class="string">'data/jaggedOrbit.png'</span>); 
+}
+
+<span class="function">function</span> <span class="function">setup</span>() {   
+  <span class="function">createCanvas</span>(<span class="function">windowWidth</span>, <span class="function">windowHeight</span>);   
+  <span class="function">background</span>(0);   
+  <span class="comment">noLoop();</span> 
+}
+
+<span class="function">function</span> <span class="function">draw</span>() {    
+  <span class="function">image</span>(img, <span class="function">mouseX</span>-img.width/2, <span class="function">mouseY</span>-img.height/2, img.width, width/img.width*img.height);
+  
+  <span class="keyword">for</span> (<span class="keyword">let</span> x = 0; x < img.width; x += pixelSize) {     
+    <span class="keyword">for</span> (<span class="keyword">let</span> y = 0; y < img.height; y += pixelSize) {       
+      <span class="keyword">let</span> c = img.<span class="function">get</span>(x, y);       
+      <span class="function">fill</span>(c);       
+      <span class="function">noStroke</span>();       
+      <span class="keyword">let</span> px = <span class="function">random</span>(x - pixelSize / 2, x + pixelSize / 2);       
+      <span class="keyword">let</span> py = <span class="function">random</span>(y - pixelSize / 2, y + pixelSize / 2);       
+      <span class="function">ellipse</span>(px, py, pixelSize, pixelSize);     
+    }   
+  } 
+}</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="file-path-section">
+                <h3>Image(s) Load</h3>
+                <div class="path-example">
+                    <div class="code-block p5js">
+                        <div class="traffic-lights">
+                            <div class="traffic-light red"></div>
+                            <div class="traffic-light yellow"></div>
+                            <div class="traffic-light green"></div>
+                        </div>
+                        <div class="code-content"><span class="keyword">var</span> img, img2; 
+
+<span class="function">function</span> <span class="function">preload</span>() {   
+  img=<span class="function">loadImage</span>(<span class="string">"data/face.png"</span>);   
+  img2=<span class="function">loadImage</span>(<span class="string">"data/rainbow.png"</span>); 
+}
+
+<span class="function">function</span> <span class="function">setup</span>() {   
+  <span class="function">createCanvas</span>(<span class="function">windowWidth</span>, <span class="function">windowHeight</span>); 
+}
+
+<span class="function">function</span> <span class="function">draw</span>() {   
+  <span class="keyword">if</span> (<span class="function">mouseIsPressed</span>){   
+    <span class="function">image</span>(img, <span class="function">mouseX</span>-50, <span class="function">mouseY</span>-50, 100, 100/img.width*img.height); 
+  } <span class="keyword">else</span> {   
+    <span class="function">image</span>(img2, <span class="function">mouseX</span>-50, <span class="function">mouseY</span>-50, 100, 100/img.width*img.height); 
+  } 
+}</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
