@@ -1,3 +1,6 @@
+<!--Some initial writing and debugging support was assisted by AI (ChatGPT).
+All final decisions, code, and reflections are my own.-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -345,6 +348,27 @@
                 link: "./Workbook/Week6/index.html",
                 background: "./Workbook/img/weekly-background/week6bg.png",
                 music: "./Workbook/music/wk6music.mp3"  // updated music path
+            },
+            { 
+                title: "WEEK 7", 
+                img: "./Workbook/img/weekly-preview/week7.png", 
+                link: "./Workbook/Week7/index.html",
+                background: "./Workbook/img/weekly-background/week7bg.png",
+                music: "./Workbook/music/wk6music.mp3"  
+            },
+            { 
+                title: "WEEK 8", 
+                img: "./Workbook/img/weekly-preview/week8.png", 
+                link: "./Workbook/Week8/index.html",
+                background: "./Workbook/img/weekly-background/week4bg.png",
+                music: "./Workbook/music/wk6music.mp3" 
+            },
+            { 
+                title: "WEEK 9", 
+                img: "./Workbook/img/weekly-preview/week9.png", 
+                link: "./Workbook/Week9/index.html",
+                background: "./Workbook/img/weekly-background/week9bg.png",
+                music: "./Workbook/music/wk6music.mp3"
             }
         ];
         
@@ -505,7 +529,7 @@
                 p.createCanvas(p.windowWidth, p.windowHeight);
                 p.noStroke();
                 
-                // Initialize FFT analysis and amplitude for when music starts
+                // Initialise FFT analysis and amplitude for when music starts
                 fft = new p5.FFT(0.8, 128);
                 amplitude = new p5.Amplitude();
                 
@@ -565,43 +589,6 @@
                 for (let i = 0; i < rightBars.length; i++) {
                     rightBars[i].update(spectrum, i, true);  // true = right side
                     rightBars[i].draw();
-                }
-
-                
-                // Week 4+ specific visualizations
-                if (currentIndex >= 3 && initialized && sound && sound.isPlaying()) {
-                    // Circular bass visualization
-                    const bassValue = fft.getEnergy("bass");
-                    const bassRadius = p.map(bassValue, 0, 255, 100, 300);
-                    
-                    p.push();
-                    p.translate(p.width/2, p.height/2);
-                    p.fill(62, 138, 150, 20); // Lower opacity
-                    p.ellipse(0, 0, bassRadius, bassRadius);
-                    p.pop();
-                    
-                    // Mid-high frequency visualization around the player
-                    const trebleValue = fft.getEnergy("treble");
-                    const trebleItems = 16;
-                    
-                    p.push();
-                    p.translate(p.width/2, p.height/2);
-                    
-                    for (let i = 0; i < trebleItems; i++) {
-                        const angle = p.map(i, 0, trebleItems, 0, p.TWO_PI);
-                        const radius = 200; // Distance from center
-                        const x = p.cos(angle) * radius;
-                        const y = p.sin(angle) * radius;
-                        const barHeight = p.map(trebleValue, 0, 255, 10, 40);
-                        
-                        p.push();
-                        p.translate(x, y);
-                        p.rotate(angle + p.HALF_PI);
-                        p.fill(247, 189, 99, 25); // Lower opacity
-                        p.rect(-5, -barHeight/2, 10, barHeight);
-                        p.pop();
-                    }
-                    p.pop();
                 }
             };
             p.windowResized = function() {
