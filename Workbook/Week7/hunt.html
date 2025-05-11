@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HUNT'N'GATHER #7 #8 #9</title>
+  <link rel="stylesheet" href="../../style.css" />
+  <style>
+    .project-card {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .project-card img {
+      width: 100%;
+      border-radius: 6px;
+      object-fit: cover;
+    }
+
+    .video-embed {
+      margin-top: 10px;
+      border-radius: 8px;
+      overflow: hidden;
+      max-width: 100%;
+      aspect-ratio: 16 / 9;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .project-card h4 {
+      color: #F7BD63;
+      margin-bottom: 5px;
+    }
+
+    .project-card p {
+      margin-bottom: 10px;
+    }
+
+    .video-preview-container {
+    position: relative;
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    }
+
+    .video-preview-container img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    }
+
+    .video-hover-text {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    font-size: 14px;
+    padding: 6px 12px;
+    border-radius: 4px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    }
+
+    .video-preview-container:hover .video-hover-text {
+    opacity: 1;
+    }
+
+  </style>
+</head>
+<body>
+  <a href="javascript:history.back()" class="back-button">← Go Previous</a>
+
+  <div class="container">
+    <section class="section">
+      <div class="section-header">
+        <h2>HUNT'N'GATHER #7 #8 #9</h2>
+        <p class="section-subtitle">Exploring Physical Computing Projects</p>
+      </div>
+
+      <p>
+        Find & document (with a reference & one sentence & 1 image) 3 × examples of interesting / engaging / quirky / unique / or otherwise noteworthy PHYSICAL COMPUTING examples.
+        These could be wearables, installations, design or art objects.
+      </p>
+      <p><strong>How are they interactive? What do they do?</strong></p>
+      <p>I explored <a href="https://www.behance.net/search/projects/physical%20computing" target="_blank">this Behance search</a> for inspiration.</p>
+
+      <!-- Project 1: MindInGo -->
+      <div class="project-card">
+        <h3>1. MindInGo</h3>
+        <img src="../img/workshop/7-1.png" alt="MindInGo Interface Image" />
+        <p><strong>What it is:</strong> A wearable headband that detects brainwave activity and responds with ambient soundscapes and visual feedback to guide users through meditation or focus sessions.</p>
+        <p><strong>How it's interactive:</strong> Uses EEG sensors to measure the user's mental state and dynamically adjusts audiovisuals to support mindfulness.</p>
+        <p><strong>What it does:</strong> Creates a biofeedback loop — the calmer your mind becomes, the more harmonious the environment becomes, helping users train their brains to relax or concentrate.</p>
+        <blockquote>“MindInGo is an immersive experience offering a unique perception of yourself.”</blockquote>
+      </div>
+
+      <!-- Project 2: Oggway -->
+      <div class="project-card">
+        <h3>2. Oggway – Wooden Box Email Interface</h3>
+        <img src="../img/workshop/7-2.png" alt="Oggway Wooden Email Box" />
+        <p><strong>What it is:</strong> A wooden box with tactile interaction that lets users manage emails through touch-based sorting.</p>
+        <p><strong>How it's interactive:</strong> Tapping once releases a single email; holding releases all — light and sound signal unread messages.</p>
+        <p><strong>What it does:</strong> Slows down and calms the experience of digital communication using physical, deliberate gestures to filter inboxes.</p>
+        <blockquote>“Touch when you want the emails let through.”</blockquote>
+      </div>
+
+      <!-- Project 3: Six-Forty by Four-Eighty -->
+    <div class="project-card">
+        <h3>3. Six-Forty by Four-Eighty – Interactive Pixel Wall</h3>
+        <p><strong>What it is:</strong> A massive wall of 220 magnetic pixels that respond to touch and motion like a physical screen.</p>
+        <p><strong>How it's interactive:</strong> Users touch the surface to change colours, trigger movement, or use a remote control to shift animations in speed or sharpness.</p>
+        <p><strong>What it does:</strong> Makes digital pixels tangible — transforming an entire wall into a living, responsive visual space.</p>
+        <a href="https://www.youtube.com/watch?v=a6jSyVopYXM" target="_blank">
+            <div class="video-preview-container">
+              <img src="../img/workshop/preview.png" alt="Video preview" />
+              <div class="video-hover-text">▶ Click to watch the video</div>
+            </div>
+          </a>
+
+    </div>
+    
+    </section>
+  </div>
+</body>
+</html>

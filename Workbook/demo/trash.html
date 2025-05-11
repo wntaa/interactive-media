@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trash Website Demo</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      background: #fefefe;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+    .box {
+      border: 4px dashed #012B3B;
+      padding: 40px;
+      background: #FED800;
+      color: #012B3B;
+      max-width: 400px;
+      border-radius: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>Swipe Gesture Simulated</h2>
+    <p>Press ← or → arrow key to simulate a gesture.</p>
+    <p id="result"></p>
+  </div>
+
+  <script>
+    document.addEventListener('keydown', (e) => {
+      const result = document.getElementById('result');
+      if (e.key === 'ArrowRight') {
+        result.textContent = 'Detected: Swipe Right \u2192 Redirect to page2.html';
+      } else if (e.key === 'ArrowLeft') {
+        result.textContent = 'Detected: Swipe Left \u2190 Redirect to page1.html';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 7 - Physical Computing</title>
+    <link rel="stylesheet" href="../../style.css">
+    <style>
+        /* Additional styles for new sections */
+        .reflection-box {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #3E8A96;
+        }
+        
+        .speculative-interfaces {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .speculative-card {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .speculative-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .speculative-image {
+            width: 100%;
+            height: 200px;
+            background-color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .speculative-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .speculative-content {
+            padding: 20px;
+        }
+        
+        .speculative-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #F7BD63;
+        }
+        
+        .speculative-description {
+            margin-bottom: 15px;
+        }
+        
+        .speculative-detail {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        
+        .workshop-process {
+            margin-top: 40px;
+        }
+        
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .process-item {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .process-item h4 {
+            color: #F7BD63;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        
+        .process-item p {
+            margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        .gesture-analysis {
+            margin-top: 40px;
+        }
+        
+        .gesture-description {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .course-theme {
+            background: rgba(247, 189, 99, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 40px;
+            border-left: 4px solid #F7BD63;
+        }
+    </style>
+</head>
+<body>
+  <a href="javascript:history.back()" class="back-button">← Go Previous</a>
+
+    <div class="container">
+        <section class="section">
+          <div class="section-header">
+            <h2>Workshop Activity: Blink Buzz Vroom</h2>
+            <p class="section-subtitle">Arduino Prototyping Basics</p>
+          </div>
+      
+          <div class="workshop-process">
+            <h3>Working in Pairs – Tinkercad Model</h3>
+            <ul>
+              <li>Build your first circuit</li>
+              <li>Build your second circuit</li>
+            </ul>
+      
+            <h3>Arduino Live Coding Demo</h3>
+            <p>We followed a live demo to:</p>
+            <ul>
+              <li>Set up the Arduino IDE and board</li>
+              <li>Understand the anatomy of an Arduino sketch</li>
+            </ul>
+      
+            <div class="process-grid" style="margin-top: 30px;">
+              <div class="process-item">
+                <h4>Arduino Circuit Build (Week 8 Intro Pic)</h4>
+                <img src="../img/workshop/7-3.png" alt="Arduino Circuit Image">
+              </div>
+              <div class="process-item">
+                <h4>Diagram of Arduino Uno Board</h4>
+                <img src="../img/workshop/7-4.png" alt="Arduino Uno Board Diagram">
+              </div>
+            </div>
+          </div>
+      
+          <div class="reflection-box">
+            <h3>What I Learnt from this Activity</h3>
+            <p><strong>Arduino Setup</strong></p>
+            <ul>
+              <li>How to <strong>install the Arduino IDE</strong></li>
+              <li>How to connect your <strong>Arduino Uno board</strong> to your computer</li>
+              <li>How to select the correct <strong>board and port</strong></li>
+              <li>How to upload code from the IDE to the board</li>
+            </ul>
+      
+            <p><strong>Arduino Sketch Structure</strong></p>
+            <pre><code>void setup() {
+        // runs once
+      }
+      
+      void loop() {
+        // runs forever
+      }</code></pre>
+      
+            <p>Similar to p5.js, Arduino sketches have <code>setup()</code> and <code>loop()</code> functions:</p>
+            <ul>
+              <li><code>setup()</code> is for initial setup like <code>pinMode</code></li>
+              <li><code>loop()</code> is for repeating actions like blinking an LED</li>
+            </ul>
+      
+            <aside style="margin-top: 20px; font-style: italic;">
+              I started to understand how microcontroller logic works—setup once, then repeat logic over time in a loop.
+            </aside>
+          </div>
+      
+          <div class="reflection-box">
+            <h3>Issue We Faced</h3>
+            <p>At first, no matter how many times we tried running the code, it didn’t work. We later realised it was essential to:</p>
+            <ul>
+              <li>Set up the correct Uno board and port in the Arduino IDE</li>
+              <li>Install the required libraries such as <code>IRremote.h</code></li>
+            </ul>
+          </div>
+        </section>
+      </div>
+      
+
+</body>
+</html>

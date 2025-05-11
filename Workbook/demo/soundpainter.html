@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soundpainter Demo</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/addons/p5.sound.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #012B3B;
+      color: #F8F8FF;
+      font-family: 'Inter', sans-serif;
+    }
+    #info {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: rgba(0,0,0,0.6);
+      padding: 10px 20px;
+      border-radius: 8px;
+      border-left: 4px solid #F7BD63;
+    }
+  </style>
+</head>
+<body>
+  <div id="info">
+    <p>Press <strong>1</strong> for Drum<br>Press <strong>2</strong> for Slime</p>
+  </div>
+  <script>
+    let drumSound, pianoSound;
+    let shapes = [];
+
+    function preload() {
+      drumSound = loadSound('../music/beatbox.mp3');
+      pianoSound = loadSound('../music/blob-walking.mp3');
+    }
+
+    function setup() {
+      createCanvas(windowWidth, windowHeight);
+      noStroke();
+    }
+
+    function draw() {
+      background('#012B3B');
+      for (let i = shapes.length - 1; i >= 0; i--) {
+        shapes[i].update();
+        shapes[i].display();
+        if (shapes[i].lifespan <= 0) shapes.splice(i, 1);
+      }
+    }
+
+    function keyPressed() {
+      if (key === '1') {
+        drumSound.play();
+        for (let i = 0; i < 10; i++) {
+          shapes.push(new CircleShape());
+        }
+      } else if (key === '2') {
+        pianoSound.play();
+        for (let i = 0; i < 5; i++) {
+          shapes.push(new LineShape());
+        }
+      }
+    }
+
+    class CircleShape {
+      constructor() {
+        this.x = random(width);
+        this.y = random(height);
+        this.r = random(30, 80);
+        this.col = color(255, random(100, 200), 50, 180);
+        this.lifespan = 100;
+      }
+      update() {
+        this.r += 0.5;
+        this.lifespan -= 2;
+      }
+      display() {
+        fill(this.col);
+        ellipse(this.x, this.y, this.r);
+      }
+    }
+
+    class LineShape {
+      constructor() {
+        this.x1 = random(width);
+        this.y1 = random(height);
+        this.x2 = this.x1 + random(-50, 50);
+        this.y2 = this.y1 + random(-50, 50);
+        this.alpha = 255;
+        this.col = color(50, 200, 255, this.alpha);
+        this.lifespan = 100;
+      }
+      update() {
+        this.alpha -= 5;
+        this.col.setAlpha(this.alpha);
+        this.lifespan -= 2;
+      }
+      display() {
+        stroke(this.col);
+        strokeWeight(2);
+        line(this.x1, this.y1, this.x2, this.y2);
+        noStroke();
+      }
+    }
+  </script>
+</body>
+</html>

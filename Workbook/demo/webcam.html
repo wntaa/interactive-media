@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Webcam Filter Demo</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.min.js"></script>
+  <style>
+    body { margin: 0; overflow: hidden; background-color: #012B3B; color: white; font-family: sans-serif; }
+    h2 { position: absolute; top: 10px; left: 20px; font-size: 16px; color: #FED800; }
+  </style>
+</head>
+<body>
+  <script>
+    let video;
+    let vScale = 20;
+    let buttonsArray = [];
+    let sizeButton = vScale + 1;
+    let startingPoint = vScale / 2;
+    let spacing = vScale;
+    let speed = 9;
+
+    function setup() {
+      createCanvas(640, 480);
+      pixelDensity(1);
+      video = createCapture(VIDEO);
+      video.size(width / vScale, height / vScale);
+      video.hide();
+
+      rectMode(CENTER);
+      createElement('h2', 'Click and drag mouse over the circles');
+
+      for (let y = startingPoint; y < height; y += spacing) {
+        for (let x = startingPoint; x < width; x += spacing) {
+          buttonsArray.push(new Buttons(x, y, sizeButton, speed));
+        }
+      }
+    }
+
+    function draw() {
+      background(0);
+
+      video.loadPixels();
+      loadPixels();
+
+      for (let y = 0; y < video.height; y++) {
+        for (let x = 0; x < video.width; x++) {
+          let i = (x + y * video.width) * 4;
+          let r = video.pixels[i + 0];
+          let g = video.pixels[i + 1];
+          let b = video.pixels[i + 2];
+
+          // Apply a tint (e.g., red filter)
+          fill(r, g * 0.4, b * 0.4);
+          noStroke();
+          ellipse(x * vScale + startingPoint, y * vScale + startingPoint, vScale, vScale);
+        }
+      }
+
+      for (let i = 0; i < buttonsArray.length; i++) {
+        buttonsArray[i].move();
+        buttonsArray[i].blackCircle();
+        buttonsArray[i].button();
+      }
+    }
+
+    class Buttons {
+      constructor(x, y, s, spd) {
+        this.x = x;
+        this.y = y;
+        this.s = s;
+        this.spd = spd;
+        this.offset = random(0, 1000);
+        this.isHovered = false;
+      }
+
+      move() {
+        this.offset += 0.01;
+        this.s = sizeButton + sin(this.offset * this.spd) * 2;
+      }
+
+      blackCircle() {
+        if (dist(mouseX, mouseY, this.x, this.y) < this.s / 2 && mouseIsPressed) {
+          this.isHovered = true;
+        }
+        if (this.isHovered) {
+          fill(0);
+          noStroke();
+          ellipse(this.x, this.y, this.s);
+        }
+      }
+
+      button() {
+        stroke(255);
+        noFill();
+        ellipse(this.x, this.y, this.s);
+      }
+    }
+  </script>
+</body>
+</html>

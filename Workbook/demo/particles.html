@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music Player Particles</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.min.js"></script>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #012B3B;
+      color: #F8F8FF;
+      font-family: 'Inter', sans-serif;
+    }
+    #title {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      font-size: 24px;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    let particles = [];
+    let playerBar;
+
+    function setup() {
+      createCanvas(windowWidth, windowHeight);
+
+      // Create 30 floating particles
+      for (let i = 0; i < 30; i++) {
+        particles.push({
+          x: random(width),
+          y: random(height),
+          size: random(5, 20),
+          speedX: random(-2, 2),
+          speedY: random(-2, 2),
+          color: color(random(255), random(255), random(255))
+        });
+      }
+
+      // Music player bar visual
+      playerBar = {
+        x: width / 4,
+        y: height - 100,
+        width: width / 2,
+        height: 20,
+        glow: false
+      }
+    }
+
+    function draw() {
+      background(1, 43, 59, 50); // transparent background
+
+      // Draw music player bar
+      noStroke();
+      fill(playerBar.glow ? '#F7BD63' : '#F8F8FF');
+      rect(playerBar.x, playerBar.y, playerBar.width, playerBar.height, 10);
+
+      // Draw and move particles
+      for (let p of particles) {
+        fill(p.color);
+        noStroke();
+        circle(p.x, p.y, p.size);
+
+        p.x += p.speedX;
+        p.y += p.speedY;
+
+        // Bounce off walls
+        if (p.x < 0 || p.x > width) p.speedX *= -1;
+        if (p.y < 0 || p.y > height) p.speedY *= -1;
+
+        // React to player bar proximity
+        if (p.y + p.size/2 > playerBar.y && p.y < playerBar.y + playerBar.height &&
+            p.x > playerBar.x && p.x < playerBar.x + playerBar.width) {
+          p.speedY *= -1;
+          playerBar.glow = true;
+        }
+      }
+
+      playerBar.glow = false; // reset glow each frame
+    }
+  </script>
+</body>
+</html>

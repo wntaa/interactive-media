@@ -1,0 +1,108 @@
+<!--Some initial writing and debugging support was assisted by AI (ChatGPT).
+All final decisions, code, and reflections are my own.-->
+
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Process - Week 9</title>
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .idea-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin: 40px 0;
+      align-items: flex-start;
+    }
+    .reflection-box {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      padding: 20px;
+      border-left: 4px solid #3E8A96;
+    }
+    .code-preview {
+      background: #111;
+      color: #eee;
+      padding: 20px;
+      border-radius: 8px;
+    }
+    iframe {
+      width: 100%;
+      height: 280px;
+      border: none;
+      border-radius: 6px;
+      background: #3E8A96;
+    }
+    button {
+      margin-bottom: 10px;
+      background-color: #F7BD63;
+      color: #012B3B;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #d9a84c;
+    }
+
+    img {
+        width:500px;
+    }
+  </style>
+</head>
+<body>
+    <a href="javascript:history.back()" class="back-button">← Go Previous</a>
+
+  <div class="container">
+    <section class="section">
+      <div class="section-header">
+        <h2>Workshop Activity</h2>
+        <p class="section-subtitle">Week 9 – Feedback for Project Ideas</p>
+      </div>
+      <div class="idea-section">
+        <div class="reflection-box">
+          <h3>Stress Release Website</h3>
+          <p>This week I expanded on the gesture-based experimental website from Week 8. I received the following tutor feedback:</p>
+          <ul>
+            <li>Consider letting the user input a word or show a live camera feed — then based on the content, the system shows a website to destroy.</li>
+            <li>Add destructive gestures, not just “sorry” — e.g. swiping, punching, slamming animations.</li>
+            <li>Think about the meaning behind the action — what websites are being destroyed and why?</li>
+          </ul>
+          <p>I plan to explore gesture recognition further and potentially integrate both camera and keyboard triggers.</p>
+    
+        </div>
+        <img src="../img/workshop/9-9.png" alt="Stress Release Website sketch" />
+      </div>
+
+      <div class="idea-section">
+        <div class="reflection-box">
+          <h3>Paint with Sound</h3>
+          <p>This idea transforms musical input into live visual expression. I explored FFT via the p5.sound library and considered combining webcam input for expressive drawings. Tutor feedback included:</p>
+          <ul>
+            <li>Use FFT (Fast Fourier Transform) to visualise sound frequencies.</li>
+            <li>Add camera input as an optional mode of drawing.</li>
+            <li>Refine the purpose — is it an interactive artwork? A sound diary? An expressive tool?</li>
+          </ul>
+          <p>The idea blends auditory and visual expression — ideally letting the user both play and paint simultaneously. The prototype sketches helped me visualise possible interactions.</p>
+        </div>
+        <div>
+            <img src="../img/workshop/9-4.png" alt="Paint with Sound sketch 2" />
+            <img src="../img/workshop/9-3.png" alt="Paint with Sound sketch 1" />
+        </div>
+      </div>
+
+      <div class="idea-section">
+        <div class="reflection-box">
+            <h2>To Do</h2>
+            <h4>Decide on one idea and develop!</h4>
+        </div>
+      </div>
+
+    </section>
+  </div>
+</body>
+</html>

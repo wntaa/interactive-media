@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Week 6 Sound Demo</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/addons/p5.sound.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: #F7BD63;
+      font-family: sans-serif;
+    }
+    .note {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      color: #012B3B;
+      font-weight: bold;
+      background: #fff3;
+      padding: 10px 16px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="note">Click to play/pause sound. Move mouse to draw circles.</div>
+  <script>
+    let sound, analyzer;
+    let lastCircleTime = 0;
+
+    function preload() {
+      sound = loadSound("../music/bgmusic.mp3");
+    }
+
+    function setup() {
+      createCanvas(windowWidth, windowHeight);
+      background("#F7BD63");
+      getAudioContext().suspend();
+      analyzer = new p5.Amplitude();
+    }
+
+    function draw() {
+        volume = analyzer.getLevel();
+
+        if (millis() - lastCircleTime > 100) { // 100ms = 10 circles per second
+            fill(255, 100, 150, 150);
+            noStroke();
+            circle(mouseX, mouseY, volume * 100);
+            lastCircleTime = millis();
+        }
+    }
+
+    function mousePressed() {
+      getAudioContext().resume();
+      analyzer.setInput(sound);
+      loop();
+      if (sound.isPlaying()) {
+        sound.stop();
+        sound.noLoop();
+      } else {
+        sound.play();
+        sound.loop();
+      }
+    }
+  </script>
+</body>
+</html>

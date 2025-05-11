@@ -1,11 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Week 7 Navigation</title>
+
+  <link rel="stylesheet" href="../../style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.min.js"></script>
+
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      overflow: hidden;
+      background-color: #012B3B;
+    }
+
+    .container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 10;
+    }
+
+    h1 {
+      font-size: 68px;
+      color: #F8F8FF;
+      margin-bottom: 30px;
+    }
+
+    .link-button {
+      display: inline-block;
+      margin: 10px;
+      padding: 14px 28px;
+      border-radius: 40px;
+      background-color: transparent;
+      border: 2px solid #F8F8FF;
+      color: #F8F8FF;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 18px;
+      transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .link-button:hover {
+      background-color: #F8F8FF;
+      color: #012B3B;
+      transform: scale(1.1);
+    }
+
+    .hint-text {
+      color: #F8F8FF;
+      font-size: 16px;
+      font-weight: 400;
+      opacity: 0.7;
+      margin-bottom: 40px;
+      animation: floatText 4s ease-in-out infinite;
+    }
+
+    @keyframes floatText {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+  </style>
 </head>
 <body>
-    
+    <a href="javascript:history.back()" class="back-button">← Go Previous</a>
+
+
+  <div class="container">
+    <p class="hint-text">Click the bubbles!</p>
+    <h1>Week 7</h1>
+    <a href="./workshop.html" class="link-button">WORKSHOP</a>
+    <a href="./hunt.html" class="link-button">HUNT'N'GATHER</a>
+    <a href="./2bfeedback.html" class="link-button">2B FEEDBACK</a>
+  </div>
+
+  <script>
+    let colors = ['#F2B558', '#3C8493'];
+    let circles = [];
+
+    function setup() {
+      let canvas = createCanvas(windowWidth, windowHeight);
+      canvas.position(0, 0);
+      canvas.style('z-index', '-1');
+      noStroke();
+
+      for (let i = 0; i < 60; i++) {
+        circles.push({
+          x: random(width),
+          y: random(height),
+          r: random(20, 80),
+          speedX: random(-0.7, 0.7),
+          speedY: random(-0.7, 0.7),
+          col: color(random(colors)),
+          isPulsing: false,
+          pulseFrame: 0
+        });
+      }
+    }
+
+    function draw() {
+      background('#012B3B');
+
+      for (let c of circles) {
+        let d = dist(mouseX, mouseY, c.x, c.y);
+        if (d < c.r / 2) {
+          cursor('pointer');
+        }
+
+        if (c.isPulsing) {
+          c.pulseFrame++;
+          if (c.pulseFrame < 5) {
+            c.r *= 0.95;
+          } else if (c.pulseFrame < 10) {
+            c.r *= 1.05;
+          } else {
+            c.isPulsing = false;
+            c.pulseFrame = 0;
+          }
+        }
+
+        fill(c.col);
+        ellipse(c.x, c.y, c.r, c.r);
+
+        c.x += c.speedX;
+        c.y += c.speedY;
+
+        if (c.x < 0 || c.x > width) c.speedX *= -1;
+        if (c.y < 0 || c.y > height) c.speedY *= -1;
+      }
+    }
+
+    function mousePressed() {
+      for (let c of circles) {
+        let d = dist(mouseX, mouseY, c.x, c.y);
+        if (d < c.r / 2) {
+          c.col = color(random(colors));
+          c.isPulsing = true;
+          break;
+        }
+      }
+    }
+
+    function windowResized() {
+      resizeCanvas(windowWidth, windowHeight);
+    }
+  </script>
+
 </body>
 </html>

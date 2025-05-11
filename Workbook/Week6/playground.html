@@ -1,0 +1,68 @@
+<!--Some initial writing and debugging support was assisted by AI (ChatGPT).
+All final decisions, code, and reflections are my own.-->
+
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 6 Playground</title>
+  <link rel="stylesheet" href="../../style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.min.js"></script>
+  <style>
+    .demo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      margin: 40px 0;
+    }
+    .demo-box {
+      background: #000;
+      border-radius: 8px;
+      padding: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .demo-box button {
+      margin-bottom: 10px;
+      background-color: #F7BD63;
+      color: #012B3B;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .demo-box button:hover {
+      background-color: #d9a84c;
+    }
+    iframe {
+      width: 100%;
+      height: 280px;
+      border: none;
+      border-radius: 6px;
+      background: #3E8A96;
+    }
+  </style>
+</head>
+<body>
+    
+  <div class="container">
+    <section class="section">
+      <div class="section-header">
+        <h2>Week 6 Playground</h2>
+        <p class="section-subtitle">p5.js Interaction</p>
+      </div>
+
+      <div class="demo-grid">
+        <div class="demo-box">
+          <button onclick="document.getElementById('demo1').src='../demo/sound.html'">Run Demo</button>
+          <iframe id="demo1"></iframe>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

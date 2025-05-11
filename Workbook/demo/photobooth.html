@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photobooth Demo</title>
+  <style>
+    body {
+      background-color: #012B3B;
+      color: #F8F8FF;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    video {
+      border: 4px solid #F7BD63;
+      border-radius: 10px;
+      width: 480px;
+      max-width: 90%;
+    }
+    button {
+      margin-top: 20px;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 6px;
+      background-color: #F7BD63;
+      color: #012B3B;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background-color: #e2a94d;
+    }
+    p {
+      margin-top: 10px;
+      font-size: 14px;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <video id="webcam" autoplay playsinline></video>
+  <button onclick="takePhoto()">Take Photo</button>
+  <p>(This is a demo – photo capture is not active)</p>
+
+  <script>
+    const video = document.getElementById('webcam');
+
+    // Start webcam stream
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(stream => {
+        video.srcObject = stream;
+      })
+      .catch(err => {
+        console.error('Camera access denied:', err);
+      });
+
+    function takePhoto() {
+      alert("📸 Click! (Demo only – image not saved)");
+    }
+  </script>
+</body>
+</html>

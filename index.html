@@ -51,7 +51,6 @@ All final decisions, code, and reflections are my own.-->
 
         .music-player {
             position: relative;
-            background: rgba(0, 0, 0, 0.4);
             width: 300px;
             padding: 20px;
             text-align: center;
@@ -318,7 +317,7 @@ All final decisions, code, and reflections are my own.-->
                 title: "WEEK 2", 
                 img: "./Workbook/img/weekly-preview/week2.png", 
                 link: "./Workbook/Week2/index.html",
-                background: "./Workbook/img/weekly-background/week2bg.png",
+                background: "./Workbook/img/weekly-background/week4bg.png",
                 music: "./Workbook/music/bgmusic.mp3"  // updated music path
             },
             { 
@@ -354,21 +353,21 @@ All final decisions, code, and reflections are my own.-->
                 img: "./Workbook/img/weekly-preview/week7.png", 
                 link: "./Workbook/Week7/index.html",
                 background: "./Workbook/img/weekly-background/week7bg.png",
-                music: "./Workbook/music/wk6music.mp3"  
+                music: "./Workbook/music/bgmusic.mp3"  
             },
             { 
                 title: "WEEK 8", 
                 img: "./Workbook/img/weekly-preview/week8.png", 
                 link: "./Workbook/Week8/index.html",
                 background: "./Workbook/img/weekly-background/week4bg.png",
-                music: "./Workbook/music/wk6music.mp3" 
+                music: "./Workbook/music/wk4music.mp3" 
             },
             { 
                 title: "WEEK 9", 
                 img: "./Workbook/img/weekly-preview/week9.png", 
                 link: "./Workbook/Week9/index.html",
                 background: "./Workbook/img/weekly-background/week9bg.png",
-                music: "./Workbook/music/wk6music.mp3"
+                music: "./Workbook/music/wk5music.mp3"
             }
         ];
         
@@ -452,10 +451,14 @@ All final decisions, code, and reflections are my own.-->
                         
                         // Adjust size based on audio
                         this.glowSize = this.size * 2.5 * (1 + normalizedEnergy * 0.5);
-                    } else {
+                    }
+                    else {
                         this.currentColor = this.whiteColor;
                     }
+
                 }
+                
+
                 
                 draw() {
                     // Calculate pulsing glow effect
@@ -473,6 +476,7 @@ All final decisions, code, and reflections are my own.-->
                     p.fill(p.red(c), p.green(c), p.blue(c), 40); // Slightly more opaque center
                     p.ellipse(this.x, this.y, this.size, this.size);
                 }
+            
             }
             
             class SoundBar {

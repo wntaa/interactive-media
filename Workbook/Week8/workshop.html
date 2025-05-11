@@ -1,0 +1,209 @@
+<!--Some initial writing and debugging support was assisted by AI (ChatGPT).
+All final decisions, code, and reflections are my own.-->
+
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 8 - Physical Computing</title>
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    .reflection-box {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+      border-left: 4px solid #3E8A96;
+    }
+
+    .workshop-process {
+      margin-top: 40px;
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .process-item {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .process-item h4 {
+      color: #F7BD63;
+      margin-top: 0;
+      margin-bottom: 15px;
+    }
+
+    .process-item p {
+      margin-bottom: 15px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .process-item img {
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+      align-self: center;
+      border-radius: 6px;
+    }
+
+    pre {
+      background: #111;
+      color: #eee;
+      padding: 15px;
+      border-radius: 6px;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+  <a href="javascript:history.back()" class="back-button">← Go Previous</a>
+
+  <div class="container">
+    <section class="section">
+      <div class="section-header">
+        <h2>Workshop Activity: Physical Computing</h2>
+        <p class="section-subtitle">Capacitive Touch & IR Remote LEDs</p>
+      </div>
+
+      <div class="workshop-process">
+        <h3>Theory</h3>
+        <ul>
+          <li>GND = Ground → start with this, fundamental and always required</li>
+          <li>INPUT (sensors) → PROCESS/code (interpretation / translation) → OUTPUT (control)</li>
+          <li><code>read</code> = receiving input | <code>write</code> = sending output</li>
+          <li>Sensors require Voltage (+), Ground (-)</li>
+          <li>C++ uses Ohm's Law: I = V/R</li>
+        </ul>
+
+        <h3>Capacitive Touch Music Machine</h3>
+        <div class="process-grid">
+          <div class="process-item">
+            <h4>Diagram</h4>
+            <img src="../img/workshop/8-3.png" alt="Capacitive Touch Diagram">
+          </div>
+          <div class="process-item">
+            <h4>Photo of My Uno Board</h4>
+            <img src="../img/workshop/8-1.png" alt="My Uno Board Photo">
+          </div>
+        </div>
+
+        <h4>Code</h4>
+        <pre><code>#include &lt;CapacitiveSensor.h&gt;
+#define PIEZO_PIN 9
+#define LED_PIN 4
+#define csSamples 5
+
+CapacitiveSensor cs_2_3 = CapacitiveSensor(2, 3);
+CapacitiveSensor cs_2_5 = CapacitiveSensor(2, 5);
+CapacitiveSensor cs_2_6 = CapacitiveSensor(2, 6);
+
+int sen1Val, sen2Val, sen3Val = 0;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(PIEZO_PIN, OUTPUT);
+  pinMode(LED_PIN, OUTPUT);
+  Serial.println("Setup complete. Ready for touch!");
+}
+
+void loop() {
+  sen1Val = cs_2_3.capacitiveSensor(csSamples);
+  sen2Val = cs_2_5.capacitiveSensor(csSamples);
+  sen3Val = cs_2_6.capacitiveSensor(csSamples);
+
+  if (sen1Val > 50) tone(PIEZO_PIN, 262, 200);
+  else if (sen2Val > 50) tone(PIEZO_PIN, 294, 200);
+  else if (sen3Val > 50) tone(PIEZO_PIN, 330, 200);
+  else noTone(PIEZO_PIN);
+  delay(100);
+}</code></pre>
+
+        <h3>IR Remote Controlled LEDs</h3>
+        <div class="process-grid">
+          <div class="process-item">
+            <h4>Diagram</h4>
+            <img src="../img/workshop/8-4.png" alt="IR LED Diagram">
+          </div>
+          <div class="process-item">
+            <h4>Photo of My Uno Board</h4>
+            <img src="../img/workshop/8-2.png" alt="My Board Setup">
+          </div>
+        </div>
+
+        <h4>Code</h4>
+        <pre><code>#include &lt;IRremote.h&gt;
+int voltage[12];
+IRrecv irrecv(12);
+decode_results results;
+unsigned long key_value = 0;
+
+void setup() {
+  Serial.begin(9600);
+  SetUpPins();
+  irrecv.enableIRIn();
+  irrecv.blink13(true);
+}
+
+void loop() {
+  TranslateIR();
+}
+
+void ToggleLED(int pin) {
+  if (voltage[pin]) {
+    digitalWrite(pin, LOW);
+    voltage[pin] = 0;
+  } else {
+    digitalWrite(pin, HIGH);
+    voltage[pin] = 1;
+  }
+}
+
+void SetUpPins() {
+  for (int i = 2; i &lt;= 11; i++) {
+    pinMode(i, OUTPUT);
+    digitalWrite(i, LOW);
+  }
+  pinMode(10, OUTPUT);
+  pinMode(11, OUTPUT);
+}
+
+void TranslateIR() {
+  if (irrecv.decode(&results)) {
+    if (results.value == 0XFFFFFFFF) results.value = key_value;
+    switch(results.value) {
+      case 0xFD30CF: ToggleLED(2); break;
+      case 0xFD08F7: ToggleLED(3); break;
+      case 0xFD8877: ToggleLED(4); break;
+      case 0xFD48B7: ToggleLED(5); break;
+      case 0xFD28D7: ToggleLED(6); break;
+      case 0xFDA857: ToggleLED(7); break;
+      case 0xFD6897: ToggleLED(8); break;
+      case 0xFD18E7: ToggleLED(9); break;
+      case 0xFD9867: ToggleLED(10); break;
+      case 0xFD58A7: ToggleLED(11); break;
+    }
+    key_value = results.value;
+    irrecv.resume();
+  }
+}</code></pre>
+      </div>
+      <div class="workshop-process">
+        <h3>WHAT I LEARNT</h3>
+        <p>When connecting wires on the board, it is important to connect to the right row. We don’t need to specifically follow the columns accurately but the row should be connected with wires accurately. </p>
+        <p>Must download the libraries on Arduino Sketch to run the code. </p>
+        <p>When pasting the code from the instruction, be careful not to have two setup() and loop() functions. (Delete the default ones) </p>
+
+      </div>
+  </div>
+</body>
+</html>

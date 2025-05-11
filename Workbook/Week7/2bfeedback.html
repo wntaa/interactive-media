@@ -1,0 +1,181 @@
+<!--Some initial writing and debugging support was assisted by AI (ChatGPT).
+All final decisions, code, and reflections are my own.-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>2B Feedback & 2C Plan</title>
+
+  <link rel="stylesheet" href="../../style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #012B3B;
+      color: #F8F8FF;
+      line-height: 1.6;
+      padding: 60px 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 58px;
+      margin-bottom: 20px;
+      color: #f2B558;
+      border-bottom: 2px solid #f2B558;
+      padding-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 42px;
+      margin-top: 40px;
+      color: #F2B558;
+    }
+
+    .card {
+      background-color: rgba(248, 248, 255, 0.05); /* subtle ghost white overlay */
+      padding: 20px;
+      margin-top: 15px;
+      border-left: 4px solid #F2B558;
+      border-radius: 8px;
+    }
+
+    img {
+      max-width: 100%;
+      margin-top: 10px;
+      border-radius: 6px;
+    }
+
+    a.button {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 24px;
+      background-color: transparent;
+      border: 2px solid #F8F8FF;
+      color: #F8F8FF;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    a.button:hover {
+      background-color: #F8F8FF;
+      color: #012B3B;
+    }
+
+    ul {
+      margin-top: 10px;
+      padding-left: 20px;
+    }
+
+    .floating-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: transparent;
+    border: 2px solid #F8F8FF;
+    color: #F8F8FF;
+    padding: 14px 24px;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+    z-index: 999;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(4px);
+    }
+
+    .floating-button:hover {
+    background-color: #F8F8FF;
+    color: #012B3B;
+    box-shadow: 0 0 15px #F8F8FF;
+    }
+
+    .floating-button.scrolled {
+    box-shadow: 0 0 20px #FED800, 0 0 35px #F2B558;
+    border-color: #FED800;
+    color: #FED800;
+    }
+
+  </style>
+</head>
+<body>
+  <a href="javascript:history.back()" class="back-button">← Go Previous</a>
+
+    <a href="./choose.html" class="floating-button">Go to 2B Experimentations</a>
+
+  <div class="container">
+    <h1>2B Feedback</h1>
+
+    <h2>Add Process</h2>
+    <div class="card">
+      <p>I need to show my working process more. The workbook is showcasing my learning from the course, not the final product.</p>
+      <p>I will add sections such as:</p>
+      <ul>
+        <li>areas I struggled with</li>
+        <li>how I fixed the errors</li>
+        <li>things I tested but did not use</li>
+      </ul>
+    </div>
+
+    <h2>Acknowledgement of AI Use</h2>
+    <div class="card">
+      <p>I will add the acknowledgement comment on top of my code file if I have used AI in any part of my development of this project.</p>
+      <img src="../img/aiUse.png" alt="AI Use Screenshot">
+    </div>
+
+    <h2>Navigation Struggle</h2>
+    <div class="card">
+      <p>I will add a "Go to previous page" button to make navigation more intuitive.</p>
+      <p>For example: on each week's subpage, I will add a “Back to Week Overview” link.</p>
+    </div>
+
+    <h2>Interactivity</h2>
+    <div class="card">
+      <p>Instead of just showing code snippets, I should showcase how I used the code I learnt to add interactivity to my site.</p>
+      <p>I’ve added a 2B experimentation page showing my understanding and p5.js practice. Each week has its own themed "music player" interaction.</p>
+    </div>
+   
+    <h1 style="margin-top: 80px">My Plan for 2C</h1>
+
+    <div class="card">
+      <ul>
+        <li>Add experimentation pages for Week 4–6 to show understanding in p5.js</li>
+        <li>Improve workbook navigation with "Go to previous page" links</li>
+        <li>Enhance interactivity using:
+          <ul>
+            <li>Scroll-triggered animation</li>
+            <li>Mouse hover effects</li>
+            <li>Game-like interactions</li>
+          </ul>
+        </li>
+        <li>Use <code>@media</code> for responsiveness</li>
+        <li>Show my working process for the final project</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    const button = document.querySelector('.floating-button');
+  
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        button.classList.add('scrolled');
+      } else {
+        button.classList.remove('scrolled');
+      }
+    });
+  </script>
+  
+</body>
+</html>
