@@ -42,6 +42,30 @@ All final decisions, code, and reflections are my own.-->
         }
     </script>
     <style>
+        .back-button {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            background: #F7BD63;
+            color: #121D36;
+            padding: 12px 24px;
+            text-decoration: none;
+            font-size: 14px;
+            z-index: 100;
+            transition: all 0.3s ease;
+            font-family: 'Anton', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-button:hover {
+            background: white;
+            color: #121D36;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
         /* Base styles */
         body {
             display: flex;
@@ -206,6 +230,7 @@ All final decisions, code, and reflections are my own.-->
     </style>
 </head>
 <body>
+    <a href="javascript:history.back()" class="back-button">← Go Previous</a>
     
     <!-- Particles background -->
     <div class="particles" id="particles"></div>
